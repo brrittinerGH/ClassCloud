@@ -52,4 +52,5 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="btIniciarSesion">Iniciar Sesion</string>
+    <string name="btSalir">Salir</string>
 </resources>

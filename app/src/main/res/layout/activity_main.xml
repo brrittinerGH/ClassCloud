@@ -7,12 +7,51 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btIniciarSesion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btIniciarSesion"
-        tools:layout_editor_absoluteX="138dp"
-        tools:layout_editor_absoluteY="341dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/lyLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="260dp"
+            android:orientation="horizontal"
+            android:scaleX="1.30"
+            android:scaleY="1.30">
+
+            <ImageView
+                android:id="@+id/ImgLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:layout_weight="1"
+                app:srcCompat="@mipmap/Imagen" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyLogin"
+            android:layout_width="match_parent"
+            android:layout_height="358dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:textAlignment="center">
+
+            <Button
+                android:id="@+id/btIniciarSesion"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="@string/btIniciarSesion"
+                android:textColorLink="#3F3F3F" />
+
+            <Button
+                android:id="@+id/btSalir"
+                android:layout_width="203dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/btSalir" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
