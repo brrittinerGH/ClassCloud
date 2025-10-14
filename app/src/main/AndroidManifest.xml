@@ -12,15 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClassCloud">
         <activity
+            android:name=".AlumnoActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ClassCloud" />
+        <activity
             android:name=".AdminActivity"
             android:exported="false"
             android:theme="@style/Theme.ClassCloud" />
         <activity
-            android:name=".ProfesorActivity"
-            android:exported="false"
-            android:theme="@style/Theme.ClassCloud" />
-        <activity
-            android:name=".AlumnoActivity"
+            android:name=".ProfeActivity"
             android:exported="false"
             android:theme="@style/Theme.ClassCloud" />
         <activity
