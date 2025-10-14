@@ -7,9 +7,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.classcloud.AdminActivity;
-import com.example.classcloud.AlumnoActivity;
-import com.example.classcloud.ProfesorActivity;
 import com.example.classcloud.R;
 
 public class LoginActivity extends AppCompatActivity {

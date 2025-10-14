@@ -53,4 +53,7 @@
     </string>
     <string name="btIniciarSesion">Iniciar Sesion</string>
     <string name="btSalir">Salir</string>
+    <string name="btCrearMateria">Crear Materia</string>
+    <string name="btAsignarProfesor">Asignar Profesor</string>
+    <string name="btVolver">Volver</string>
 </resources>

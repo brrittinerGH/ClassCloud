@@ -12,11 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClassCloud">
         <activity
-            android:name=".ProfesorActivity"
+            android:name=".AdminActivity"
             android:exported="false"
             android:theme="@style/Theme.ClassCloud" />
         <activity
-            android:name=".AdminActivity"
+            android:name=".ProfesorActivity"
             android:exported="false"
             android:theme="@style/Theme.ClassCloud" />
         <activity
@@ -27,7 +27,6 @@
             android:name=".ui.login.LoginActivity"
             android:exported="false"
             android:label="@string/title_activity_login" />
-
         <activity
             android:name=".MainActivity"
             android:exported="true">

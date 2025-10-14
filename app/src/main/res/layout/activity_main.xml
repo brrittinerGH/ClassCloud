@@ -10,22 +10,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <LinearLayout
             android:id="@+id/lyLogo"
             android:layout_width="wrap_content"
             android:layout_height="260dp"
+            android:layout_weight="0"
             android:orientation="horizontal"
             android:scaleX="1.30"
             android:scaleY="1.30">
 
             <ImageView
-                android:id="@+id/ImgLogo"
+                android:id="@+id/Logo"
                 android:layout_width="wrap_content"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@mipmap/Imagen" />
+                app:srcCompat="@drawable/imagen" />
         </LinearLayout>
 
         <LinearLayout
@@ -40,6 +43,7 @@
                 android:id="@+id/btIniciarSesion"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/btColor"
                 android:text="@string/btIniciarSesion"
                 android:textColorLink="#3F3F3F" />
 
@@ -48,6 +52,7 @@
                 android:layout_width="203dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:backgroundTint="@color/btColor"
                 android:text="@string/btSalir" />
 
         </LinearLayout>
