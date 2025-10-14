@@ -56,4 +56,9 @@
     <string name="btCrearMateria">Crear Materia</string>
     <string name="btAsignarProfesor">Asignar Profesor</string>
     <string name="btVolver">Volver</string>
+    <string name="btVerMaterias">Ver materias</string>
+    <string name="btModificarMaterias">Modificar Materias</string>
+    <string name="btGuardarMateria">Guardar Materia</string>
+    <string name="nombreMateria">Nombre Materia</string>
+    <string name="profesorMateria">Profesor Asignado</string>
 </resources>

@@ -7,9 +7,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.classcloud.AdminActivity;
-import com.example.classcloud.AlumnoActivity;
-import com.example.classcloud.ProfeActivity;
+import com.example.classcloud.ui.admin.AdminActivity;
+import com.example.classcloud.ui.alumno.AlumnoActivity;
+import com.example.classcloud.ui.profesor.ProfeActivity;
 import com.example.classcloud.R;
 
 import com.example.classcloud.data.AppDatabase;

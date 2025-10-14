@@ -12,15 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClassCloud">
         <activity
-            android:name=".AlumnoActivity"
+            android:name=".ui.admin.ModificarMateriaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.admin.CrearMateriaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.alumno.AlumnoActivity"
             android:exported="false"
             android:theme="@style/Theme.ClassCloud" />
         <activity
-            android:name=".AdminActivity"
+            android:name=".ui.admin.AdminActivity"
             android:exported="false"
             android:theme="@style/Theme.ClassCloud" />
         <activity
-            android:name=".ProfeActivity"
+            android:name=".ui.profesor.ProfeActivity"
             android:exported="false"
             android:theme="@style/Theme.ClassCloud" />
         <activity
