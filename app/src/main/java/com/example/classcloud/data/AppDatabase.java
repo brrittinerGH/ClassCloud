@@ -5,15 +5,16 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import com.example.classcloud.data.MateriaDAO;
 
-@Database(entities = {Usuario.class, Materia.class}, version = 2)
+@Database(entities = {Usuario.class, Materia.class, Inscripcion.class, Evaluacion.class, Calificacion.class, Asistencia.class}, version = 6)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UsuarioDAO usuarioDao();
-
     public abstract MateriaDAO materiaDao();
-
+    public abstract InscripcionDAO inscripcionDao();
+    public abstract EvaluacionDAO evaluacionDao();
+    public abstract CalificacionDAO calificacionDao();
+    public abstract AsistenciaDAO asistenciaDao();
 
     private static AppDatabase INSTANCE;
 
@@ -25,7 +26,7 @@ public abstract class AppDatabase extends RoomDatabase {
                             "classcloud_db"
                     )
                     .allowMainThreadQueries()
-                    .fallbackToDestructiveMigration() // 🔹 necesario al cambiar la versión
+                    .fallbackToDestructiveMigration()
                     .build();
         }
         return INSTANCE;

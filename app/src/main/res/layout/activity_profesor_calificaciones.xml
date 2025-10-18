@@ -5,45 +5,46 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.alumno.AlumnoActivity">
+    tools:context=".ui.profesor.ProfesorCalificaciones">
+
 
     <LinearLayout
-        android:id="@+id/lyAlumno"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:padding="16dp">
 
-        <TextView
-            android:id="@+id/titulo"
-            android:text="Materias disponibles"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <ListView
-            android:id="@+id/listMaterias"
+        <EditText
+            android:id="@+id/etAlumno"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_height="wrap_content"
+            android:hint="Alumno"
+            android:minHeight="48dp" />
 
-        <Button
-            android:id="@+id/btVerInscripciones"
+        <EditText
+            android:id="@+id/etMateria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:backgroundTint="@color/btColor"
-            android:text="@string/btInscripciones" />
+            android:hint="Materia"
+            android:minHeight="48dp" />
 
-        <Button
-            android:id="@+id/btVerEvaluaciones"
+        <EditText
+            android:id="@+id/etNota"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:hint="Nota"
+            android:inputType="numberDecimal"
+            android:minHeight="48dp" />
+
+        <Button
+            android:id="@+id/btGuardarNota"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:backgroundTint="@color/btColor"
-            android:text="@string/btVerEvaluaciones" />
+            android:text="@string/btGuardarNota" />
 
         <Button
             android:id="@+id/btVerNotas"
@@ -51,17 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:backgroundTint="@color/btColor"
-            android:text="@string/btVerNotasPromedio" />
-
-        <Button
-            android:id="@+id/btnVerAsistencias"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/btColor"
-            android:text="@string/btVerAsistencia" />
-
-
+            android:text="@string/btVerNotas" />
 
         <Button
             android:id="@+id/btVolver"
@@ -70,8 +61,6 @@
             android:layout_marginTop="8dp"
             android:backgroundTint="@color/btColor"
             android:text="@string/btVolver" />
-
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

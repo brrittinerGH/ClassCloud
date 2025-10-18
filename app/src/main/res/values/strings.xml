@@ -61,4 +61,12 @@
     <string name="btGuardarMateria">Guardar Materia</string>
     <string name="nombreMateria">Nombre Materia</string>
     <string name="profesorMateria">Profesor Asignado</string>
+    <string name="btInscripciones">Ver Inscripciones</string>
+    <string name="btEvaluaciones">Ver Evaluaciones</string>
+    <string name="btGuardarEvaluacion">Guardar Evaluacion</string>
+    <string name="btVerEvaluaciones">Ver fechas de exámenes y trabajos</string>
+    <string name="btGuardarNota">Guardar nota</string>
+    <string name="btVerNotas">Ver notas</string>
+    <string name="btVerNotasPromedio">Ver mis notas y promedio</string>
+    <string name="btVerAsistencia">Ver asistencias</string>
 </resources>

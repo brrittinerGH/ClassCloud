@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClassCloud">
         <activity
+            android:name=".ui.profesor.ProfesorAsistencias"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profesor.ProfesorCalificaciones"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profesor.ProfesorEvaluaciones"
+            android:exported="false" />
+        <activity
             android:name=".ui.admin.ModificarMateriaActivity"
             android:exported="false" />
         <activity
