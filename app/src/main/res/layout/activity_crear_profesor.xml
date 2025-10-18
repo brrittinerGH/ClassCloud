@@ -5,8 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profesor.ProfesorCalificacionesActivity">
-
+    tools:context=".ui.admin.CrearProfesorActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,45 +13,37 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <TextView
+            android:text="Agregar nuevo profesor"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp" />
+
         <EditText
-            android:id="@+id/etAlumno"
+            android:id="@+id/etNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Alumno"
+            android:hint="Nombre de usuario"
             android:minHeight="48dp" />
 
         <EditText
-            android:id="@+id/etMateria"
+            android:id="@+id/etContrasena"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:hint="Materia"
-            android:minHeight="48dp" />
-
-        <EditText
-            android:id="@+id/etNota"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="Nota"
-            android:inputType="numberDecimal"
+            android:hint="Contraseña"
+            android:inputType="textPassword"
             android:minHeight="48dp" />
 
         <Button
-            android:id="@+id/btGuardarNota"
+            android:id="@+id/btGuardar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/btColor"
-            android:text="@string/btGuardarNota" />
-
-        <Button
-            android:id="@+id/btVerNotas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/btColor"
-            android:text="@string/btVerNotas" />
+            android:text="@string/btGuardar" />
 
         <Button
             android:id="@+id/btVolver"
@@ -62,5 +53,6 @@
             android:backgroundTint="@color/btColor"
             android:text="@string/btVolver" />
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

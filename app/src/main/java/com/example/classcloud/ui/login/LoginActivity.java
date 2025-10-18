@@ -7,15 +7,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.classcloud.ui.admin.AdminActivity;
-import com.example.classcloud.ui.alumno.AlumnoActivity;
-import com.example.classcloud.ui.profesor.ProfeActivity;
 import com.example.classcloud.R;
-
 import com.example.classcloud.data.AppDatabase;
 import com.example.classcloud.data.Usuario;
 import com.example.classcloud.data.UsuarioDAO;
-
+import com.example.classcloud.ui.admin.AdminActivity;
+import com.example.classcloud.ui.alumno.AlumnoActivity;
+import com.example.classcloud.ui.profesor.ProfeActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -24,20 +22,17 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Conectamos los elementos del XML
         Button loginButton = findViewById(R.id.login);
         EditText userField = findViewById(R.id.Usuario);
         EditText passField = findViewById(R.id.Contrasenia);
 
-        // Inicializamos la base de datos
+        // Inicializar base de datos
         AppDatabase db = AppDatabase.getInstance(this);
         UsuarioDAO dao = db.usuarioDao();
 
-        // Insertamos usuarios iniciales si la tabla está vacía
+        // 🔹 Crear usuario admin si no existe
         if (dao.login("admin", "1234") == null) {
             dao.insertar(new Usuario("admin", "1234", "admin"));
-            dao.insertar(new Usuario("profe", "1234", "profe"));
-            dao.insertar(new Usuario("alumno", "1234", "alumno"));
         }
 
         // Acción al presionar el botón
@@ -46,22 +41,37 @@ public class LoginActivity extends AppCompatActivity {
             String contrasenia = passField.getText().toString().trim();
 
             if (nombreUsuario.isEmpty() || contrasenia.isEmpty()) {
-                Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Validamos el usuario con Room
+            // Buscar usuario en la base de datos
             Usuario usuario = dao.login(nombreUsuario, contrasenia);
 
             if (usuario != null) {
-                Toast.makeText(this, "Bienvenido " + usuario.getRol(), Toast.LENGTH_SHORT).show();
+                // Usuario encontrado
+                Toast.makeText(this, "Bienvenido " + usuario.getNombre(), Toast.LENGTH_SHORT).show();
 
-                if (usuario.getRol().equals("admin")) {
-                    startActivity(new Intent(this, AdminActivity.class));
-                } else if (usuario.getRol().equals("profe")) {
-                    startActivity(new Intent(this, ProfeActivity.class));
-                } else if (usuario.getRol().equals("alumno")) {
-                    startActivity(new Intent(this, AlumnoActivity.class));
+                switch (usuario.getRol()) {
+                    case "admin":
+                        startActivity(new Intent(this, AdminActivity.class));
+                        break;
+
+                    case "profesor":
+                        Intent intentProfesor = new Intent(this, ProfeActivity.class);
+                        intentProfesor.putExtra("nombreProfesor", usuario.getNombre());
+                        startActivity(intentProfesor);
+                        break;
+
+                    case "alumno":
+                        Intent intentAlumno = new Intent(this, AlumnoActivity.class);
+                        intentAlumno.putExtra("nombreAlumno", usuario.getNombre());
+                        startActivity(intentAlumno);
+                        break;
+
+                    default:
+                        Toast.makeText(this, "Rol desconocido", Toast.LENGTH_SHORT).show();
+                        break;
                 }
 
                 finish();
@@ -69,10 +79,5 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 }
-
-
-
-

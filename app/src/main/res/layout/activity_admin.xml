@@ -36,6 +36,14 @@
             android:gravity="center|center_horizontal"
             android:orientation="vertical">
 
+            <Button
+                android:id="@+id/btAgregarProfesor"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/btColor"
+                android:text="@string/btAgregarProfesor" />
+
 
             <Button
                 android:id="@+id/btCrearMateria"

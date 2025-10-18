@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profesor.ProfesorAsistencias">
+    tools:context=".ui.profesor.ProfesorAsistenciasActivity">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -55,7 +55,7 @@
             android:layout_marginTop="8dp" />
 
         <Button
-            android:id="@+id/btnVolver"
+            android:id="@+id/btVolver"
             android:text="Volver"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
