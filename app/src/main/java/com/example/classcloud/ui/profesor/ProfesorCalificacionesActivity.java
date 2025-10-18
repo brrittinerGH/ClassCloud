@@ -14,7 +14,7 @@ import com.example.classcloud.data.CalificacionDAO;
 
 import java.util.List;
 
-public class ProfesorCalificaciones extends AppCompatActivity {
+public class ProfesorCalificacionesActivity extends AppCompatActivity {
 
     private EditText etAlumno, etMateria, etNota;
     private Button btnGuardarNota, btnVerNotas, btnVolver;

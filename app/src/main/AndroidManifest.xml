@@ -12,13 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClassCloud">
         <activity
-            android:name=".ui.profesor.ProfesorAsistencias"
+            android:name=".ui.admin.CrearProfesorActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.profesor.ProfesorCalificaciones"
+            android:name=".ui.profesor.ProfesorAsistenciasActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.profesor.ProfesorEvaluaciones"
+            android:name=".ui.profesor.ProfesorCalificacionesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profesor.ProfesorEvaluacionesActivity"
             android:exported="false" />
         <activity
             android:name=".ui.admin.ModificarMateriaActivity"

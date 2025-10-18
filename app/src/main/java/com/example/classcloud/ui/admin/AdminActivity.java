@@ -36,6 +36,13 @@ public class AdminActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+
+        Button btnAgregarProfesor = findViewById(R.id.btAgregarProfesor);
+
+        btnAgregarProfesor.setOnClickListener(v -> {
+            startActivity(new Intent(this, CrearProfesorActivity.class));
+        });
+
     }
 }
 

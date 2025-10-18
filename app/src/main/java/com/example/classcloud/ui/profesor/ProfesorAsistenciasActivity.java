@@ -14,7 +14,7 @@ import com.example.classcloud.data.AsistenciaDAO;
 
 import java.util.List;
 
-public class ProfesorAsistencias extends AppCompatActivity {
+public class ProfesorAsistenciasActivity extends AppCompatActivity {
 
     private EditText etAlumno, etMateria, etFecha, etEstado;
     private Button btnGuardarAsistencia, btnVerAsistencias, btnVolver;
@@ -31,7 +31,7 @@ public class ProfesorAsistencias extends AppCompatActivity {
         etEstado = findViewById(R.id.etEstado);
         btnGuardarAsistencia = findViewById(R.id.btnGuardarAsistencia);
         btnVerAsistencias = findViewById(R.id.btnVerAsistencias);
-        btnVolver = findViewById(R.id.btnVolver);
+        btnVolver = findViewById(R.id.btVolver);
 
         asistenciaDao = AppDatabase.getInstance(this).asistenciaDao();
 
