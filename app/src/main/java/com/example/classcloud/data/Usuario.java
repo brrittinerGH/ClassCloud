@@ -19,6 +19,7 @@ public class Usuario {
         this.rol = rol;
     }
 
+
     public String getNombre() { return nombre; }
     public String getContrasenia() { return contrasenia; }
     public String getRol() { return rol; }
