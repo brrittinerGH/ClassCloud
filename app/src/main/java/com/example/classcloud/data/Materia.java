@@ -10,10 +10,16 @@ public class Materia {
     public int id;
 
     public String nombre;
-    public String profesor; // guardamos el nombre o usuario del profesor asignado
+    public String profesor;
 
     public Materia(String nombre, String profesor) {
         this.nombre = nombre;
         this.profesor = profesor;
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
 }

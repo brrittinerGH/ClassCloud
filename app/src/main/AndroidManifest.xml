@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClassCloud">
         <activity
-            android:name=".ui.admin.CrearProfesorActivity"
+            android:name=".ui.profesor.ProfesorVerEvaluacionesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.admin.CrearUsuarioActivity"
             android:exported="false" />
         <activity
             android:name=".ui.profesor.ProfesorAsistenciasActivity"

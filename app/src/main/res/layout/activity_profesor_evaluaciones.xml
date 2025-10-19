@@ -9,19 +9,18 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <EditText
-            android:id="@+id/etMateria"
+        <Spinner
+            android:id="@+id/spinnerMateria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Materia"
+            android:layout_marginBottom="8dp"
             android:minHeight="48dp" />
 
-        <EditText
-            android:id="@+id/etTipo"
+        <Spinner
+            android:id="@+id/spinnerTipo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="Tipo (Examen / Trabajo)"
+            android:layout_marginBottom="8dp"
             android:minHeight="48dp" />
 
         <EditText
@@ -32,13 +31,22 @@
             android:hint="Descripción"
             android:minHeight="48dp" />
 
-        <EditText
-            android:id="@+id/etFecha"
+        <Button
+            android:id="@+id/btFecha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:hint="Fecha (YYYY-MM-DD)"
-            android:minHeight="48dp" />
+            android:backgroundTint="@color/btColor"
+            android:text="@string/btFecha" />
+
+        <TextView
+            android:id="@+id/tvFechaSeleccionada"
+            android:text="Fecha no seleccionada"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="4dp" />
+
 
         <Button
             android:id="@+id/btGuardarEval"

@@ -39,4 +39,7 @@
     <string name="btCrearEvaluaciones">Crear Evaluaciones</string>
     <string name="btCalificaciones">Cargar Calificaciones</string>
     <string name="btAsistencias">Controlar Asistencias</string>
+    <string name="rbProfesor">Profesor</string>
+    <string name="rbAlumno">Alumno</string>
+    <string name="btFecha">Seleccionar fecha</string>
 </resources>

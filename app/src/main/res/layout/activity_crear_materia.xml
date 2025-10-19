@@ -20,12 +20,11 @@
             android:hint="@string/nombreMateria"
             android:minHeight="48dp" />
 
-        <EditText
-            android:id="@+id/profesorMateria"
+        <Spinner
+            android:id="@+id/spinnerProfesor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:hint="@string/profesorMateria"
             android:minHeight="48dp" />
 
         <Button

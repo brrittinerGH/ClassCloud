@@ -15,6 +15,9 @@ public interface EvaluacionDAO {
     @Query("SELECT * FROM evaluaciones WHERE materia = :materia")
     List<Evaluacion> obtenerPorMateria(String materia);
 
+    @Query("SELECT * FROM evaluaciones")
+    List<Evaluacion> obtenerTodas();
+
     @Query("DELETE FROM evaluaciones WHERE id = :id")
     void eliminarPorId(int id);
 }

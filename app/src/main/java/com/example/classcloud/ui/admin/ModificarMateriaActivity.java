@@ -1,12 +1,12 @@
 package com.example.classcloud.ui.admin;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +15,8 @@ import com.example.classcloud.R;
 import com.example.classcloud.data.AppDatabase;
 import com.example.classcloud.data.Materia;
 import com.example.classcloud.data.MateriaDAO;
-
+import com.example.classcloud.data.Usuario;
+import com.example.classcloud.data.UsuarioDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ public class ModificarMateriaActivity extends AppCompatActivity {
     private ListView listMaterias;
     private Button btVolver;
     private MateriaDAO materiaDao;
+    private UsuarioDAO usuarioDao;
     private List<Materia> listaMaterias;
     private ArrayAdapter<String> adapter;
     private List<String> nombresMaterias;
@@ -37,11 +39,12 @@ public class ModificarMateriaActivity extends AppCompatActivity {
         listMaterias = findViewById(R.id.listMaterias);
         btVolver = findViewById(R.id.btVolver);
 
-        materiaDao = AppDatabase.getInstance(this).materiaDao();
+        AppDatabase db = AppDatabase.getInstance(this);
+        materiaDao = db.materiaDao();
+        usuarioDao = db.usuarioDao();
 
         cargarMaterias();
 
-        // Acción al hacer clic en una materia
         listMaterias.setOnItemClickListener((parent, view, position, id) -> {
             Materia seleccionada = listaMaterias.get(position);
             mostrarDialogoModificar(seleccionada);
@@ -66,20 +69,41 @@ public class ModificarMateriaActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Modificar materia");
 
-        final EditText input = new EditText(this);
-        input.setHint("Nuevo profesor para " + materia.nombre);
-        input.setText(materia.profesor);
-        builder.setView(input);
+        final Spinner spinnerProfesores = new Spinner(this);
+
+        List<Usuario> listaProfesores = usuarioDao.obtenerPorRol("profesor");
+        List<String> nombresProfesores = new ArrayList<>();
+
+        for (Usuario p : listaProfesores) {
+            nombresProfesores.add(p.getNombre());
+        }
+
+        ArrayAdapter<String> adapterProfesores = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                nombresProfesores
+        );
+        adapterProfesores.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerProfesores.setAdapter(adapterProfesores);
+
+        int indexActual = nombresProfesores.indexOf(materia.profesor);
+        if (indexActual >= 0) {
+            spinnerProfesores.setSelection(indexActual);
+        }
+
+        builder.setView(spinnerProfesores);
 
         builder.setPositiveButton("Guardar", (dialog, which) -> {
-            String nuevoProfesor = input.getText().toString().trim();
-            if (nuevoProfesor.isEmpty()) {
-                Toast.makeText(this, "El nombre no puede estar vacío", Toast.LENGTH_SHORT).show();
+            if (listaProfesores.isEmpty()) {
+                Toast.makeText(this, "No hay profesores disponibles", Toast.LENGTH_SHORT).show();
                 return;
             }
+
+            String nuevoProfesor = listaProfesores.get(spinnerProfesores.getSelectedItemPosition()).getNombre();
             materia.profesor = nuevoProfesor;
             materiaDao.actualizar(materia);
-            Toast.makeText(this, "Materia actualizada", Toast.LENGTH_SHORT).show();
+
+            Toast.makeText(this, "Profesor actualizado correctamente", Toast.LENGTH_SHORT).show();
             cargarMaterias();
         });
 

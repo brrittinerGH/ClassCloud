@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.admin.CrearProfesorActivity">
+    tools:context=".ui.admin.CrearUsuarioActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,12 +14,35 @@
         android:padding="16dp">
 
         <TextView
-            android:text="Agregar nuevo profesor"
+            android:text="Agregar nuevo usuario"
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupRol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rbProfesor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:checked="true"
+                android:text="@string/rbProfesor"
+                android:textColorLink="@color/btColor" />
+
+            <RadioButton
+                android:id="@+id/rbAlumno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rbAlumno"
+                android:textColorLink="@color/btColor" />
+        </RadioGroup>
 
         <EditText
             android:id="@+id/etNombre"
