@@ -25,7 +25,7 @@ public interface MateriaDAO {
     @Query("DELETE FROM materias WHERE id = :id")
     void eliminarPorId(int id);
 
-    @Query("SELECT * FROM materias WHERE profesor = :nombreProfesor")
+    @Query("SELECT * FROM materias WHERE LOWER(profesor) = LOWER(:nombreProfesor)")
     List<Materia> obtenerPorProfesor(String nombreProfesor);
 
 }

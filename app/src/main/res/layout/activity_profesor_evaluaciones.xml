@@ -6,6 +6,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:orientation="vertical"
         android:padding="16dp">
 
@@ -41,11 +42,11 @@
 
         <TextView
             android:id="@+id/tvFechaSeleccionada"
-            android:text="Fecha no seleccionada"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:gravity="center_horizontal"
-            android:layout_marginTop="4dp" />
+            android:text="Fecha no seleccionada" />
 
 
         <Button

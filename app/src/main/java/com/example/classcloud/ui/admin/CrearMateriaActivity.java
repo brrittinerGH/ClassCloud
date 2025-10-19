@@ -21,28 +21,35 @@ import java.util.List;
 
 public class CrearMateriaActivity extends AppCompatActivity {
 
-    private EditText nombreMateria, profesorMateria;
+    private EditText nombreMateria;
     private Button btGuardar, btVolver;
-    private MateriaDAO materiaDao;
+    private Spinner spinnerProfesores;
 
-    Spinner spinnerProfesores;
-    List<Usuario> listaProfesores;
-    UsuarioDAO usuarioDao;
+    private MateriaDAO materiaDao;
+    private UsuarioDAO usuarioDao;
+    private List<Usuario> listaProfesores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_materia);
 
-        EditText etNombreMateria = findViewById(R.id.nombreMateria);
-        Button btnGuardar = findViewById(R.id.btGuardarMateria);
+        // Inicializar vistas
+        nombreMateria = findViewById(R.id.nombreMateria);
+        btGuardar = findViewById(R.id.btGuardarMateria);
+        btVolver = findViewById(R.id.btVolver);
         spinnerProfesores = findViewById(R.id.spinnerProfesor);
 
+        // Base de datos
         AppDatabase db = AppDatabase.getInstance(this);
+        materiaDao = db.materiaDao();
         usuarioDao = db.usuarioDao();
 
-        // 🔹 Cargar solo los usuarios con rol profesor
-        listaProfesores = usuarioDao.obtenerPorRol("profesor");
+        // Cargar profesores en el Spinner (case-insensitive)
+        listaProfesores = usuarioDao.obtenerProfesores(); // nueva función DAO
+        if (listaProfesores.isEmpty()) {
+            Toast.makeText(this, "No hay profesores cargados", Toast.LENGTH_LONG).show();
+        }
 
         List<String> nombres = new ArrayList<>();
         for (Usuario u : listaProfesores) {
@@ -54,20 +61,33 @@ public class CrearMateriaActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerProfesores.setAdapter(adapter);
 
-        btnGuardar.setOnClickListener(v -> {
-            String nombreMateria = etNombreMateria.getText().toString().trim();
-            if (nombreMateria.isEmpty()) {
-                Toast.makeText(this, "Ingrese el nombre de la materia", Toast.LENGTH_SHORT).show();
-                return;
+        // Botón Guardar
+        btGuardar.setOnClickListener(v -> {
+            try {
+                String nombre = nombreMateria.getText().toString().trim();
+                if (nombre.isEmpty()) {
+                    Toast.makeText(this, "Ingrese el nombre de la materia", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (listaProfesores.isEmpty()) {
+                    Toast.makeText(this, "No hay profesores para asignar", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String profesorSeleccionado = listaProfesores.get(spinnerProfesores.getSelectedItemPosition()).getNombre();
+                materiaDao.insertar(new Materia(nombre, profesorSeleccionado));
+
+                Toast.makeText(this, "Materia creada correctamente", Toast.LENGTH_SHORT).show();
+                nombreMateria.setText("");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Error al crear la materia: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
-
-            String profesorSeleccionado = listaProfesores.get(spinnerProfesores.getSelectedItemPosition()).getNombre();
-            db.materiaDao().insertar(new Materia(nombreMateria, profesorSeleccionado));
-
-            Toast.makeText(this, "Materia creada correctamente", Toast.LENGTH_SHORT).show();
-            etNombreMateria.setText("");
         });
 
+        // Botón Volver
         btVolver.setOnClickListener(v -> finish());
     }
 }

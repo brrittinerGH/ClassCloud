@@ -16,7 +16,11 @@ public interface UsuarioDAO {
     @Insert
     void insertar(Usuario usuario);
 
-    @Query("SELECT * FROM usuarios WHERE rol = :rol")
+    @Query("SELECT * FROM usuarios WHERE LOWER(rol) = LOWER(:rol)")
     List<Usuario> obtenerPorRol(String rol);
+
+    @Query("SELECT * FROM usuarios WHERE LOWER(rol) = 'profesor'")
+    List<Usuario> obtenerProfesores();
+
 
 }
