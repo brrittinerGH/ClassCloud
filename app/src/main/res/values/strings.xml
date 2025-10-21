@@ -42,4 +42,5 @@
     <string name="rbProfesor">Profesor</string>
     <string name="rbAlumno">Alumno</string>
     <string name="btFecha">Seleccionar fecha</string>
+    <string name="btGuardarAsistencia">Guardar asistencia</string>
 </resources>

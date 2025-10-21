@@ -16,19 +16,23 @@ public interface InscripcionDAO {
     @Delete
     void eliminar(Inscripcion inscripcion);
 
-    // 🔹 Obtener todas las inscripciones
     @Query("SELECT * FROM inscripciones")
     List<Inscripcion> obtenerTodas();
 
-    // 🔹 Obtener inscripciones por alumno (por ID)
     @Query("SELECT * FROM inscripciones WHERE alumnoId = :idAlumno")
     List<Inscripcion> obtenerPorAlumno(int idAlumno);
 
-    // 🔹 Verificar si ya está inscripto en una materia
     @Query("SELECT COUNT(*) FROM inscripciones WHERE alumnoId = :idAlumno AND materiaId = :idMateria")
     int existeInscripcion(int idAlumno, int idMateria);
 
-    // 🔹 Eliminar inscripción específica
     @Query("DELETE FROM inscripciones WHERE alumnoId = :idAlumno AND materiaId = :idMateria")
     void eliminarInscripcion(int idAlumno, int idMateria);
+
+    @Query("SELECT alumnoId FROM inscripciones WHERE materiaId = :materiaId")
+    List<Integer> obtenerAlumnosPorMateria(int materiaId);
+
+    @Query("SELECT * FROM Inscripciones WHERE alumnoId = :idAlumno AND materiaId = :idMateria LIMIT 1")
+    Inscripcion obtenerPorAlumnoYMateria(int idAlumno, int idMateria);
+
+
 }

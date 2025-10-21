@@ -84,6 +84,7 @@ public class ProfeActivity extends AppCompatActivity {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         });
+
     }
 
     private void mostrarMateriasAsignadas() {

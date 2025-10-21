@@ -22,7 +22,9 @@ import com.example.classcloud.data.MateriaDAO;
 import com.example.classcloud.ui.login.LoginActivity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class AlumnoActivity extends AppCompatActivity {
 
@@ -56,7 +58,7 @@ public class AlumnoActivity extends AppCompatActivity {
         materiaDao = db.materiaDao();
         inscripcionDao = db.inscripcionDao();
 
-        // 🔹 Recuperar datos del login
+        //  Recuperar datos del login
         idAlumno = getIntent().getIntExtra("idAlumno", -1);
         nombreAlumno = getIntent().getStringExtra("nombreAlumno");
 
@@ -68,25 +70,25 @@ public class AlumnoActivity extends AppCompatActivity {
 
         cargarMaterias();
 
-        // 🔹 Inscribirse en una materia
+        //  Inscribirse en una materia
         listMaterias.setOnItemClickListener((parent, view, position, id) -> {
             Materia seleccionada = materias.get(position);
             mostrarDialogoInscripcion(seleccionada);
         });
 
-        // 🔹 Ver inscripciones
+        //  Ver inscripciones
         btnVerInscripciones.setOnClickListener(v -> mostrarInscripciones());
 
-        // 🔹 Ver evaluaciones de las materias inscriptas
+        //  Ver evaluaciones de las materias inscriptas
         btnVerEvaluaciones.setOnClickListener(v -> mostrarEvaluaciones());
 
-        // 🔹 Ver notas
+        //  Ver notas
         btnVerNotas.setOnClickListener(v -> mostrarNotas());
 
-        // 🔹 Ver asistencias
+        //  Ver asistencias
         btnVerAsistencias.setOnClickListener(v -> mostrarAsistencias());
 
-        // 🔹 Volver al login
+        //  Volver al login
         btnVolver.setOnClickListener(v -> {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
@@ -106,6 +108,14 @@ public class AlumnoActivity extends AppCompatActivity {
     }
 
     private void mostrarDialogoInscripcion(Materia materia) {
+        // Verificar si el alumno ya está inscripto en la materia
+        Inscripcion existente = inscripcionDao.obtenerPorAlumnoYMateria(idAlumno, materia.id);
+
+        if (existente != null) {
+            Toast.makeText(this, "Ya estás inscripto en esta materia", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         new AlertDialog.Builder(this)
                 .setTitle("Inscribirse en " + materia.nombre)
                 .setMessage("¿Deseás inscribirte en esta materia?")
@@ -116,6 +126,7 @@ public class AlumnoActivity extends AppCompatActivity {
                 .setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss())
                 .show();
     }
+
 
     private void mostrarInscripciones() {
         List<Inscripcion> inscripciones = inscripcionDao.obtenerPorAlumno(idAlumno);
@@ -183,18 +194,42 @@ public class AlumnoActivity extends AppCompatActivity {
         StringBuilder builder = new StringBuilder();
         builder.append("📚 Tus calificaciones:\n\n");
 
+
+        Set<Integer> materiasProcesadas = new HashSet<>();
+
         for (Calificacion c : calificaciones) {
-            Materia materia = materiaDao.obtenerPorId(c.materiaId);
-            if (materia != null) {
-                Double promedio = AppDatabase.getInstance(this)
-                        .calificacionDao()
-                        .promedioPorMateria(idAlumno, materia.id);
-                builder.append("• ").append(materia.nombre)
-                        .append(": ").append(c.nota)
-                        .append(" (Promedio: ").append(String.format("%.2f", promedio))
-                        .append(")\n");
+            if (!materiasProcesadas.contains(c.materiaId)) {
+                Materia materia = AppDatabase.getInstance(this)
+                        .materiaDao()
+                        .obtenerPorId(c.materiaId);
+
+                if (materia != null) {
+                    Double promedio = AppDatabase.getInstance(this)
+                            .calificacionDao()
+                            .promedioPorMateria(idAlumno, materia.id);
+
+                    builder.append("• ")
+                            .append(materia.nombre)
+                            .append(" (Promedio: ")
+                            .append(String.format("%.2f", promedio))
+                            .append(")\n");
+
+                    // Obtener todas las notas de esa materia
+                    List<Calificacion> notasMateria = AppDatabase.getInstance(this)
+                            .calificacionDao()
+                            .obtenerNotasMateria(idAlumno, materia.id);
+
+                    for (Calificacion nota : notasMateria) {
+                        builder.append("   - Nota: ").append(nota.nota).append("\n");
+                    }
+
+                    builder.append("\n"); // salto entre materias
+                    materiasProcesadas.add(c.materiaId);
+                }
             }
         }
+
+
 
         new AlertDialog.Builder(this)
                 .setTitle("Mis notas y promedios")

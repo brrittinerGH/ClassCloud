@@ -1,6 +1,7 @@
 package com.example.classcloud.ui.profesor;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -27,7 +28,7 @@ public class ProfesorEvaluacionesActivity extends AppCompatActivity {
     private Spinner spinnerMateria, spinnerTipo;
     private TextView tvFechaSeleccionada;
     private EditText etDescripcion;
-    private Button btFecha, btGuardarEval, btVolver;
+    private Button btFecha, btGuardarEval, btVolver, btEvaluaciones;
 
     private MateriaDAO materiaDao;
     private EvaluacionDAO evaluacionDao;
@@ -41,21 +42,22 @@ public class ProfesorEvaluacionesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profesor_evaluaciones);
 
-        // 🔹 Inicializar vistas
+        //  Inicializar vistas
         spinnerMateria = findViewById(R.id.spinnerMateria);
         spinnerTipo = findViewById(R.id.spinnerTipo);
         tvFechaSeleccionada = findViewById(R.id.tvFechaSeleccionada);
         btFecha = findViewById(R.id.btFecha);
         btGuardarEval = findViewById(R.id.btGuardarEval);
+        btEvaluaciones = findViewById(R.id.btVerEval);
         btVolver = findViewById(R.id.btVolver);
         etDescripcion = findViewById(R.id.etDescripcion);
 
-        // 🔹 Inicializar base de datos
+        //  Inicializar base de datos
         AppDatabase db = AppDatabase.getInstance(this);
         materiaDao = db.materiaDao();
         evaluacionDao = db.evaluacionDao();
 
-        // 🔹 Obtener ID del profesor logueado
+        //  Obtener ID del profesor logueado
         profesorId = getIntent().getIntExtra("idProfesor", -1);
         if (profesorId == -1) {
             Toast.makeText(this, "Error: no se encontró el ID del profesor", Toast.LENGTH_LONG).show();
@@ -63,14 +65,14 @@ public class ProfesorEvaluacionesActivity extends AppCompatActivity {
             return;
         }
 
-        // 🔹 Cargar materias asignadas al profesor
+        //  Cargar materias asignadas al profesor
         materiasProfesor = materiaDao.obtenerPorProfesorId(profesorId);
 
         if (materiasProfesor == null || materiasProfesor.isEmpty()) {
             Toast.makeText(this, "No tenés materias asignadas", Toast.LENGTH_LONG).show();
         }
 
-        // 🔹 Llenar spinner con nombres de materias
+        //  Llenar spinner con nombres de materias
         List<String> nombresMaterias = new ArrayList<>();
         for (Materia m : materiasProfesor) {
             nombresMaterias.add(m.nombre);
@@ -82,7 +84,7 @@ public class ProfesorEvaluacionesActivity extends AppCompatActivity {
         adapterMaterias.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMateria.setAdapter(adapterMaterias);
 
-        // 🔹 Tipos de evaluación
+        //  Tipos de evaluación
         String[] tipos = {"Examen", "Trabajo práctico"};
         ArrayAdapter<String> adapterTipos = new ArrayAdapter<>(
                 this, android.R.layout.simple_spinner_item, tipos
@@ -90,7 +92,7 @@ public class ProfesorEvaluacionesActivity extends AppCompatActivity {
         adapterTipos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTipo.setAdapter(adapterTipos);
 
-        // 🔹 Selector de fecha
+        //  Selector de fecha
         btFecha.setOnClickListener(v -> {
             Calendar calendar = Calendar.getInstance();
             new DatePickerDialog(
@@ -105,7 +107,7 @@ public class ProfesorEvaluacionesActivity extends AppCompatActivity {
             ).show();
         });
 
-        // 🔹 Guardar evaluación
+        //  Guardar evaluación
         btGuardarEval.setOnClickListener(v -> {
             if (materiasProfesor.isEmpty()) {
                 Toast.makeText(this, "No hay materias disponibles", Toast.LENGTH_SHORT).show();
@@ -142,7 +144,13 @@ public class ProfesorEvaluacionesActivity extends AppCompatActivity {
             tvFechaSeleccionada.setText("Fecha no seleccionada");
         });
 
-        // 🔹 Volver
+        btEvaluaciones.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ProfesorVerEvaluacionesActivity.class);
+            intent.putExtra("idProfesor", profesorId);
+            startActivity(intent);
+        });
+
+
         btVolver.setOnClickListener(v -> finish());
     }
 }
