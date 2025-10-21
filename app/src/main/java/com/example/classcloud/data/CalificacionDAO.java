@@ -3,6 +3,8 @@ package com.example.classcloud.data;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Delete;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -12,12 +14,25 @@ public interface CalificacionDAO {
     @Insert
     void insertar(Calificacion calificacion);
 
-    @Query("SELECT * FROM calificaciones WHERE alumno = :alumno")
-    List<Calificacion> obtenerPorAlumno(String alumno);
+    @Update
+    void actualizar(Calificacion calificacion);
 
-    @Query("SELECT AVG(nota) FROM calificaciones WHERE alumno = :alumno AND materia = :materia")
-    Double promedioPorMateria(String alumno, String materia);
+    @Delete
+    void eliminar(Calificacion calificacion);
 
-    @Query("DELETE FROM calificaciones WHERE id = :id")
-    void eliminarPorId(int id);
+    // Obtener todas las calificaciones
+    @Query("SELECT * FROM calificaciones")
+    List<Calificacion> obtenerTodas();
+
+    // Obtener calificaciones de un alumno
+    @Query("SELECT * FROM calificaciones WHERE alumnoId = :idAlumno")
+    List<Calificacion> obtenerPorAlumno(int idAlumno);
+
+    // Obtener calificaciones de un alumno en una materia específica
+    @Query("SELECT * FROM calificaciones WHERE alumnoId = :idAlumno AND materiaId = :idMateria")
+    List<Calificacion> obtenerNotasMateria(int idAlumno, int idMateria);
+
+    // Calcular el promedio del alumno en una materia
+    @Query("SELECT AVG(nota) FROM calificaciones WHERE alumnoId = :idAlumno AND materiaId = :idMateria")
+    Double promedioPorMateria(int idAlumno, int idMateria);
 }

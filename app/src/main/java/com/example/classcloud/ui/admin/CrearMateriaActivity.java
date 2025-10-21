@@ -34,19 +34,19 @@ public class CrearMateriaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_materia);
 
-        // Inicializar vistas
+
         nombreMateria = findViewById(R.id.nombreMateria);
         btGuardar = findViewById(R.id.btGuardarMateria);
         btVolver = findViewById(R.id.btVolver);
         spinnerProfesores = findViewById(R.id.spinnerProfesor);
 
-        // Base de datos
+
         AppDatabase db = AppDatabase.getInstance(this);
         materiaDao = db.materiaDao();
         usuarioDao = db.usuarioDao();
 
-        // Cargar profesores en el Spinner (case-insensitive)
-        listaProfesores = usuarioDao.obtenerProfesores(); // nueva función DAO
+
+        listaProfesores = usuarioDao.obtenerPorRol("profesor");
         if (listaProfesores.isEmpty()) {
             Toast.makeText(this, "No hay profesores cargados", Toast.LENGTH_LONG).show();
         }
@@ -56,12 +56,15 @@ public class CrearMateriaActivity extends AppCompatActivity {
             nombres.add(u.getNombre());
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, nombres);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                nombres
+        );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerProfesores.setAdapter(adapter);
 
-        // Botón Guardar
+
         btGuardar.setOnClickListener(v -> {
             try {
                 String nombre = nombreMateria.getText().toString().trim();
@@ -71,12 +74,16 @@ public class CrearMateriaActivity extends AppCompatActivity {
                 }
 
                 if (listaProfesores.isEmpty()) {
-                    Toast.makeText(this, "No hay profesores para asignar", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "No hay profesores disponibles", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                String profesorSeleccionado = listaProfesores.get(spinnerProfesores.getSelectedItemPosition()).getNombre();
-                materiaDao.insertar(new Materia(nombre, profesorSeleccionado));
+
+                int profesorId = listaProfesores.get(spinnerProfesores.getSelectedItemPosition()).id;
+
+
+                Materia nuevaMateria = new Materia(nombre, profesorId);
+                materiaDao.insertar(nuevaMateria);
 
                 Toast.makeText(this, "Materia creada correctamente", Toast.LENGTH_SHORT).show();
                 nombreMateria.setText("");
@@ -87,7 +94,6 @@ public class CrearMateriaActivity extends AppCompatActivity {
             }
         });
 
-        // Botón Volver
         btVolver.setOnClickListener(v -> finish());
     }
 }

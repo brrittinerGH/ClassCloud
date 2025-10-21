@@ -2,9 +2,9 @@ package com.example.classcloud.ui.admin;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -58,7 +58,9 @@ public class ModificarMateriaActivity extends AppCompatActivity {
         nombresMaterias = new ArrayList<>();
 
         for (Materia m : listaMaterias) {
-            nombresMaterias.add(m.nombre + " (Profesor: " + m.profesor + ")");
+            Usuario profesor = usuarioDao.obtenerPorId(m.profesorId);
+            String nombreProfe = (profesor != null) ? profesor.getNombre() : "Sin asignar";
+            nombresMaterias.add(m.nombre + " (Profesor/a: " + nombreProfe + ")");
         }
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nombresMaterias);
@@ -67,43 +69,45 @@ public class ModificarMateriaActivity extends AppCompatActivity {
 
     private void mostrarDialogoModificar(Materia materia) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Modificar materia");
+        builder.setTitle("Modificar materia: " + materia.nombre);
 
-        final Spinner spinnerProfesores = new Spinner(this);
-
-        List<Usuario> listaProfesores = usuarioDao.obtenerPorRol("profesor");
+        // Cargar lista de profesores
+        List<Usuario> profesores = usuarioDao.obtenerPorRol("profesor/a");
         List<String> nombresProfesores = new ArrayList<>();
-
-        for (Usuario p : listaProfesores) {
-            nombresProfesores.add(p.getNombre());
+        for (Usuario u : profesores) {
+            nombresProfesores.add(u.getNombre());
         }
 
-        ArrayAdapter<String> adapterProfesores = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_spinner_item,
-                nombresProfesores
+        // Crear spinner con los profesores
+        Spinner spinnerProfes = new Spinner(this);
+        ArrayAdapter<String> adapterProfes = new ArrayAdapter<>(
+                this, android.R.layout.simple_spinner_item, nombresProfesores
         );
-        adapterProfesores.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerProfesores.setAdapter(adapterProfesores);
+        adapterProfes.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerProfes.setAdapter(adapterProfes);
 
-        int indexActual = nombresProfesores.indexOf(materia.profesor);
-        if (indexActual >= 0) {
-            spinnerProfesores.setSelection(indexActual);
+        // Seleccionar el profesor actual en el spinner
+        Usuario profesorActual = usuarioDao.obtenerPorId(materia.profesorId);
+        if (profesorActual != null) {
+            int indexActual = nombresProfesores.indexOf(profesorActual.getNombre());
+            if (indexActual >= 0) {
+                spinnerProfes.setSelection(indexActual);
+            }
         }
 
-        builder.setView(spinnerProfesores);
+        builder.setView(spinnerProfes);
 
         builder.setPositiveButton("Guardar", (dialog, which) -> {
-            if (listaProfesores.isEmpty()) {
+            if (profesores.isEmpty()) {
                 Toast.makeText(this, "No hay profesores disponibles", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            String nuevoProfesor = listaProfesores.get(spinnerProfesores.getSelectedItemPosition()).getNombre();
-            materia.profesor = nuevoProfesor;
+            int nuevoProfeId = profesores.get(spinnerProfes.getSelectedItemPosition()).id;
+            materia.profesorId = nuevoProfeId;
             materiaDao.actualizar(materia);
 
-            Toast.makeText(this, "Profesor actualizado correctamente", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Materia actualizada correctamente", Toast.LENGTH_SHORT).show();
             cargarMaterias();
         });
 
@@ -114,7 +118,6 @@ public class ModificarMateriaActivity extends AppCompatActivity {
         });
 
         builder.setNeutralButton("Cancelar", (dialog, which) -> dialog.dismiss());
-
         builder.show();
     }
 }

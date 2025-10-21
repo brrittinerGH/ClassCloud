@@ -26,16 +26,16 @@ public class LoginActivity extends AppCompatActivity {
         EditText userField = findViewById(R.id.Usuario);
         EditText passField = findViewById(R.id.Contrasenia);
 
-        // Inicializar base de datos
+        // Base de datos
         AppDatabase db = AppDatabase.getInstance(this);
         UsuarioDAO dao = db.usuarioDao();
 
-        // 🔹 Crear usuario admin si no existe
+        // Insertar usuario admin si no existe
         if (dao.login("admin", "1234") == null) {
             dao.insertar(new Usuario("admin", "1234", "admin"));
         }
 
-        // Acción al presionar el botón
+        // Acción al presionar "Iniciar sesión"
         loginButton.setOnClickListener(v -> {
             String nombreUsuario = userField.getText().toString().trim();
             String contrasenia = passField.getText().toString().trim();
@@ -45,11 +45,9 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-            // Buscar usuario en la base de datos
             Usuario usuario = dao.login(nombreUsuario, contrasenia);
 
             if (usuario != null) {
-                // Usuario encontrado
                 Toast.makeText(this, "Bienvenido " + usuario.getNombre(), Toast.LENGTH_SHORT).show();
 
                 switch (usuario.getRol()) {
@@ -59,12 +57,16 @@ public class LoginActivity extends AppCompatActivity {
 
                     case "profesor":
                         Intent intentProfesor = new Intent(this, ProfeActivity.class);
+                        // 👇 enviamos tanto el nombre como el ID del profesor
+                        intentProfesor.putExtra("idProfesor", usuario.getId());
                         intentProfesor.putExtra("nombreProfesor", usuario.getNombre());
                         startActivity(intentProfesor);
                         break;
 
                     case "alumno":
                         Intent intentAlumno = new Intent(this, AlumnoActivity.class);
+                        // 👇 lo mismo para el alumno
+                        intentAlumno.putExtra("idAlumno", usuario.getId());
                         intentAlumno.putExtra("nombreAlumno", usuario.getNombre());
                         startActivity(intentAlumno);
                         break;
@@ -75,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 finish();
+
             } else {
                 Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
             }

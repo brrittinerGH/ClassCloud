@@ -9,13 +9,13 @@ public class Calificacion {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
-    public String alumno;   // nombre o usuario del alumno
-    public String materia;  // nombre de la materia
-    public double nota;     // nota numérica (ej. 8.5)
+    public int alumnoId;
+    public int materiaId;
+    public double nota;
 
-    public Calificacion(String alumno, String materia, double nota) {
-        this.alumno = alumno;
-        this.materia = materia;
+    public Calificacion(int alumnoId, int materiaId, double nota) {
+        this.alumnoId = alumnoId;
+        this.materiaId = materiaId;
         this.nota = nota;
     }
 }

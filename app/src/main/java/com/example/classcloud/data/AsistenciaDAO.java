@@ -3,6 +3,8 @@ package com.example.classcloud.data;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Delete;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -12,12 +14,21 @@ public interface AsistenciaDAO {
     @Insert
     void insertar(Asistencia asistencia);
 
-    @Query("SELECT * FROM asistencias WHERE alumno = :alumno")
-    List<Asistencia> obtenerPorAlumno(String alumno);
+    @Update
+    void actualizar(Asistencia asistencia);
 
-    @Query("SELECT * FROM asistencias WHERE materia = :materia")
-    List<Asistencia> obtenerPorMateria(String materia);
+    @Delete
+    void eliminar(Asistencia asistencia);
 
-    @Query("DELETE FROM asistencias WHERE id = :id")
-    void eliminarPorId(int id);
+    @Query("SELECT * FROM asistencias")
+    List<Asistencia> obtenerTodas();
+
+    @Query("SELECT * FROM asistencias WHERE alumnoId = :idAlumno")
+    List<Asistencia> obtenerPorAlumno(int idAlumno);
+
+    @Query("SELECT * FROM asistencias WHERE materiaId = :idMateria")
+    List<Asistencia> obtenerPorMateria(int idMateria);
+
+    @Query("SELECT * FROM asistencias WHERE alumnoId = :idAlumno AND materiaId = :idMateria")
+    List<Asistencia> obtenerPorAlumnoYMateria(int idAlumno, int idMateria);
 }
