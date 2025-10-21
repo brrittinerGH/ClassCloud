@@ -22,5 +22,9 @@ public interface UsuarioDAO {
     @Query("SELECT * FROM usuarios WHERE LOWER(rol) = 'profesor'")
     List<Usuario> obtenerProfesores();
 
+    @Query("SELECT * FROM usuarios WHERE id = :id")
+    Usuario obtenerPorId(int id);
+
+
 
 }

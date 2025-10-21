@@ -10,16 +10,10 @@ public class Materia {
     public int id;
 
     public String nombre;
-    public String profesor;
+    public int profesorId;
 
-    public Materia(String nombre, String profesor) {
+    public Materia(String nombre, int profesorId) {
         this.nombre = nombre;
-        this.profesor = profesor;
+        this.profesorId = profesorId;
     }
-
-    @Override
-    public String toString() {
-        return nombre;
-    }
-
 }

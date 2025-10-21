@@ -9,14 +9,14 @@ public class Asistencia {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
-    public String alumno;   // nombre o usuario del alumno
-    public String materia;  // nombre de la materia
-    public String fecha;    // formato: "2025-10-18"
-    public String estado;   // "Presente" o "Ausente"
+    public int alumnoId;
+    public int materiaId;
+    public String fecha;
+    public String estado;
 
-    public Asistencia(String alumno, String materia, String fecha, String estado) {
-        this.alumno = alumno;
-        this.materia = materia;
+    public Asistencia(int alumnoId, int materiaId, String fecha, String estado) {
+        this.alumnoId = alumnoId;
+        this.materiaId = materiaId;
         this.fecha = fecha;
         this.estado = estado;
     }

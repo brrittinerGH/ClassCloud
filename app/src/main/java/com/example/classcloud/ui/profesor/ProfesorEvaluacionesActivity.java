@@ -2,7 +2,6 @@ package com.example.classcloud.ui.profesor;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,138 +26,123 @@ public class ProfesorEvaluacionesActivity extends AppCompatActivity {
 
     private Spinner spinnerMateria, spinnerTipo;
     private TextView tvFechaSeleccionada;
-    private Button btnFecha, btnGuardarEval, btnVerEval, btnVolver;
     private EditText etDescripcion;
+    private Button btFecha, btGuardarEval, btVolver;
 
     private MateriaDAO materiaDao;
     private EvaluacionDAO evaluacionDao;
     private List<Materia> materiasProfesor;
     private String fechaSeleccionada = "";
 
+    private int profesorId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profesor_evaluaciones);
 
-        // Inicializar vistas
+        // 🔹 Inicializar vistas
         spinnerMateria = findViewById(R.id.spinnerMateria);
         spinnerTipo = findViewById(R.id.spinnerTipo);
-        btnFecha = findViewById(R.id.btFecha);
         tvFechaSeleccionada = findViewById(R.id.tvFechaSeleccionada);
-        btnGuardarEval = findViewById(R.id.btGuardarEval);
-        btnVerEval = findViewById(R.id.btVerEval);
-        btnVolver = findViewById(R.id.btVolver);
+        btFecha = findViewById(R.id.btFecha);
+        btGuardarEval = findViewById(R.id.btGuardarEval);
+        btVolver = findViewById(R.id.btVolver);
         etDescripcion = findViewById(R.id.etDescripcion);
 
-        // Base de datos
+        // 🔹 Inicializar base de datos
         AppDatabase db = AppDatabase.getInstance(this);
         materiaDao = db.materiaDao();
         evaluacionDao = db.evaluacionDao();
 
-        // Profesor logueado recibido por Intent y limpiado de espacios
-        String profesor = getIntent().getStringExtra("nombreProfesor");
-        if (profesor != null) {
-            profesor = profesor.trim();
-        } else {
-            profesor = "";
+        // 🔹 Obtener ID del profesor logueado
+        profesorId = getIntent().getIntExtra("idProfesor", -1);
+        if (profesorId == -1) {
+            Toast.makeText(this, "Error: no se encontró el ID del profesor", Toast.LENGTH_LONG).show();
+            finish();
+            return;
         }
 
-        // Obtener materias del profesor
-        materiasProfesor = materiaDao.obtenerPorProfesor(profesor);
+        // 🔹 Cargar materias asignadas al profesor
+        materiasProfesor = materiaDao.obtenerPorProfesorId(profesorId);
 
-        // --- Si no hay materias, agregamos algunas de prueba ---
-        if (materiasProfesor.isEmpty()) {
-            materiasProfesor = new ArrayList<>();
-            materiasProfesor.add(new Materia("Matemática", profesor));
-            materiasProfesor.add(new Materia("Historia", profesor));
-            materiasProfesor.add(new Materia("Lengua", profesor));
-            Toast.makeText(this, "No había materias en la base. Se cargaron materias de prueba", Toast.LENGTH_LONG).show();
+        if (materiasProfesor == null || materiasProfesor.isEmpty()) {
+            Toast.makeText(this, "No tenés materias asignadas", Toast.LENGTH_LONG).show();
         }
 
-        // Debug: mostrar materias
-        Toast.makeText(this, "Materias encontradas: " + materiasProfesor.size(), Toast.LENGTH_LONG).show();
-        for (Materia m : materiasProfesor) {
-            Log.d("DEBUG", "Materia: " + m.nombre + ", Profesor: " + m.profesor);
-        }
-
-        // Preparar Spinner de materias
+        // 🔹 Llenar spinner con nombres de materias
         List<String> nombresMaterias = new ArrayList<>();
         for (Materia m : materiasProfesor) {
             nombresMaterias.add(m.nombre);
         }
 
         ArrayAdapter<String> adapterMaterias = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_spinner_item,
-                nombresMaterias
+                this, android.R.layout.simple_spinner_item, nombresMaterias
         );
         adapterMaterias.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMateria.setAdapter(adapterMaterias);
 
-        // Spinner de tipo de evaluación
+        // 🔹 Tipos de evaluación
         String[] tipos = {"Examen", "Trabajo práctico"};
         ArrayAdapter<String> adapterTipos = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_spinner_item,
-                tipos
+                this, android.R.layout.simple_spinner_item, tipos
         );
         adapterTipos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTipo.setAdapter(adapterTipos);
 
-        // Selección de fecha
-        btnFecha.setOnClickListener(v -> {
+        // 🔹 Selector de fecha
+        btFecha.setOnClickListener(v -> {
             Calendar calendar = Calendar.getInstance();
-            new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
-                fechaSeleccionada = dayOfMonth + "/" + (month + 1) + "/" + year;
-                tvFechaSeleccionada.setText("Fecha: " + fechaSeleccionada);
-            },
+            new DatePickerDialog(
+                    this,
+                    (view, year, month, dayOfMonth) -> {
+                        fechaSeleccionada = dayOfMonth + "/" + (month + 1) + "/" + year;
+                        tvFechaSeleccionada.setText("Fecha: " + fechaSeleccionada);
+                    },
                     calendar.get(Calendar.YEAR),
                     calendar.get(Calendar.MONTH),
                     calendar.get(Calendar.DAY_OF_MONTH)
             ).show();
         });
 
-        // Guardar evaluación
-        btnGuardarEval.setOnClickListener(v -> {
-            try {
-                if (fechaSeleccionada.isEmpty()) {
-                    Toast.makeText(this, "Seleccione una fecha", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (materiasProfesor.isEmpty()) {
-                    Toast.makeText(this, "No hay materias disponibles para este profesor", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                String materia = materiasProfesor.get(spinnerMateria.getSelectedItemPosition()).nombre;
-                String tipo = spinnerTipo.getSelectedItem().toString();
-                String descripcion = etDescripcion.getText().toString().trim();
-
-                if (descripcion.isEmpty()) {
-                    Toast.makeText(this, "Ingrese una descripción", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                evaluacionDao.insertar(new Evaluacion(materia, tipo, descripcion, fechaSeleccionada));
-                Toast.makeText(this, "Evaluación guardada correctamente", Toast.LENGTH_SHORT).show();
-
-                etDescripcion.setText("");
-                tvFechaSeleccionada.setText("Fecha no seleccionada");
-                fechaSeleccionada = "";
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                Toast.makeText(this, "Error al guardar la evaluación: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        // 🔹 Guardar evaluación
+        btGuardarEval.setOnClickListener(v -> {
+            if (materiasProfesor.isEmpty()) {
+                Toast.makeText(this, "No hay materias disponibles", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            String descripcion = etDescripcion.getText().toString().trim();
+            String tipo = spinnerTipo.getSelectedItem().toString();
+
+            if (descripcion.isEmpty()) {
+                Toast.makeText(this, "Ingrese una descripción", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (fechaSeleccionada.isEmpty()) {
+                Toast.makeText(this, "Seleccione una fecha", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Materia materiaSeleccionada = materiasProfesor.get(spinnerMateria.getSelectedItemPosition());
+
+            Evaluacion nuevaEval = new Evaluacion(
+                    materiaSeleccionada.id,   // 🔹 ahora guarda el ID de materia, no su nombre
+                    tipo,
+                    descripcion,
+                    fechaSeleccionada
+            );
+
+            evaluacionDao.insertar(nuevaEval);
+            Toast.makeText(this, "Evaluación guardada correctamente", Toast.LENGTH_SHORT).show();
+
+            etDescripcion.setText("");
+            fechaSeleccionada = "";
+            tvFechaSeleccionada.setText("Fecha no seleccionada");
         });
 
-        // Volver
-        btnVolver.setOnClickListener(v -> finish());
-
-        // Ver evaluaciones (en desarrollo)
-        btnVerEval.setOnClickListener(v ->
-                Toast.makeText(this, "Abrir lista de evaluaciones (en desarrollo)", Toast.LENGTH_SHORT).show()
-        );
+        // 🔹 Volver
+        btVolver.setOnClickListener(v -> finish());
     }
 }

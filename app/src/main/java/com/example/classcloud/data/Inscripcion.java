@@ -9,11 +9,11 @@ public class Inscripcion {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
-    public String alumno;   // nombre de usuario del alumno
-    public String materia;  // nombre de la materia
+    public int alumnoId;
+    public int materiaId;
 
-    public Inscripcion(String alumno, String materia) {
-        this.alumno = alumno;
-        this.materia = materia;
+    public Inscripcion(int alumnoId, int materiaId) {
+        this.alumnoId = alumnoId;
+        this.materiaId = materiaId;
     }
 }

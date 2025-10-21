@@ -13,78 +13,139 @@ import com.example.classcloud.R;
 import com.example.classcloud.data.AppDatabase;
 import com.example.classcloud.data.Calificacion;
 import com.example.classcloud.data.CalificacionDAO;
+import com.example.classcloud.data.Inscripcion;
+import com.example.classcloud.data.InscripcionDAO;
 import com.example.classcloud.data.Materia;
 import com.example.classcloud.data.MateriaDAO;
+import com.example.classcloud.data.Usuario;
+import com.example.classcloud.data.UsuarioDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProfesorCalificacionesActivity extends AppCompatActivity {
 
-    private EditText etAlumno, etNota;
-    private Spinner spMateria;
-    private Button btnGuardarNota, btnVerNotas, btnVolver;
-    private CalificacionDAO calificacionDao;
-    private MateriaDAO materiaDao;
+    private Spinner spinnerMateria, spinnerAlumno;
+    private EditText etNota;
+    private Button btGuardar, btVolver;
 
-    private String profesor;
+    private MateriaDAO materiaDao;
+    private InscripcionDAO inscripcionDao;
+    private CalificacionDAO calificacionDao;
+    private UsuarioDAO usuarioDao;
+
+    private List<Materia> materiasProfesor;
+    private List<Usuario> alumnosInscriptos;
+
+    private int profesorId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profesor_calificaciones);
 
-        etAlumno = findViewById(R.id.etAlumno);
+        spinnerMateria = findViewById(R.id.spMateria);
+        spinnerAlumno = findViewById(R.id.spinnerAlumno);
         etNota = findViewById(R.id.etNota);
-        spMateria = findViewById(R.id.spMateria); // Spinner
-        btnGuardarNota = findViewById(R.id.btGuardarNota);
-        btnVerNotas = findViewById(R.id.btVerNotas);
-        btnVolver = findViewById(R.id.btVolver);
+        btGuardar = findViewById(R.id.btGuardarNota);
+        btVolver = findViewById(R.id.btVolver);
 
-        calificacionDao = AppDatabase.getInstance(this).calificacionDao();
-        materiaDao = AppDatabase.getInstance(this).materiaDao();
+        AppDatabase db = AppDatabase.getInstance(this);
+        materiaDao = db.materiaDao();
+        inscripcionDao = db.inscripcionDao();
+        calificacionDao = db.calificacionDao();
+        usuarioDao = db.usuarioDao();
 
-        profesor = getIntent().getStringExtra("PROFESOR");
+        // Recuperar el ID del profesor desde el intent
+        profesorId = getIntent().getIntExtra("idProfesor", -1);
+        if (profesorId == -1) {
+            Toast.makeText(this, "Error: no se encontró el ID del profesor", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
 
-        List<Materia> materias = materiaDao.obtenerPorProfesor(profesor);
-        ArrayAdapter<Materia> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, materias);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spMateria.setAdapter(adapter);
+        // Cargar materias del profesor
+        materiasProfesor = materiaDao.obtenerPorProfesor(profesorId);
+        List<String> nombresMaterias = new ArrayList<>();
+        for (Materia m : materiasProfesor) {
+            nombresMaterias.add(m.nombre);
+        }
 
-        btnGuardarNota.setOnClickListener(v -> {
-            String alumno = etAlumno.getText().toString().trim();
-            Materia materia = (Materia) spMateria.getSelectedItem();
-            String notaTexto = etNota.getText().toString().trim();
+        ArrayAdapter<String> adapterMaterias = new ArrayAdapter<>(
+                this, android.R.layout.simple_spinner_item, nombresMaterias
+        );
+        adapterMaterias.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerMateria.setAdapter(adapterMaterias);
 
-            if (alumno.isEmpty() || materia == null || notaTexto.isEmpty()) {
-                Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show();
+        // Cuando se selecciona una materia, mostrar los alumnos inscriptos
+        spinnerMateria.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(android.widget.AdapterView<?> parent, android.view.View view, int position, long id) {
+                if (materiasProfesor.isEmpty()) return;
+                Materia materiaSeleccionada = materiasProfesor.get(position);
+                cargarAlumnosInscriptos(materiaSeleccionada.id);
+            }
+
+            @Override
+            public void onNothingSelected(android.widget.AdapterView<?> parent) { }
+        });
+
+        // Guardar la nota
+        btGuardar.setOnClickListener(v -> {
+            if (alumnosInscriptos == null || alumnosInscriptos.isEmpty()) {
+                Toast.makeText(this, "No hay alumnos inscriptos en esta materia", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            double nota = Double.parseDouble(notaTexto);
-            calificacionDao.insertar(new Calificacion(alumno, materia.nombre, nota));
-            Toast.makeText(this, "Nota guardada correctamente", Toast.LENGTH_SHORT).show();
+            String notaStr = etNota.getText().toString().trim();
+            if (notaStr.isEmpty()) {
+                Toast.makeText(this, "Ingrese una nota", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-            etAlumno.setText("");
+            double nota;
+            try {
+                nota = Double.parseDouble(notaStr);
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, "Ingrese un número válido", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            int materiaId = materiasProfesor.get(spinnerMateria.getSelectedItemPosition()).id;
+            int alumnoId = alumnosInscriptos.get(spinnerAlumno.getSelectedItemPosition()).id;
+
+            Calificacion nueva = new Calificacion(alumnoId, materiaId, nota);
+            calificacionDao.insertar(nueva);
+
+            Toast.makeText(this, "Calificación guardada correctamente", Toast.LENGTH_SHORT).show();
             etNota.setText("");
         });
 
-        btnVerNotas.setOnClickListener(v -> {
-            List<Calificacion> lista = calificacionDao.obtenerPorAlumno(etAlumno.getText().toString().trim());
-            if (lista.isEmpty()) {
-                Toast.makeText(this, "No hay notas para este alumno", Toast.LENGTH_SHORT).show();
-                return;
-            }
+        btVolver.setOnClickListener(v -> finish());
+    }
 
-            StringBuilder builder = new StringBuilder();
-            for (Calificacion c : lista) {
-                builder.append("• ").append(c.materia)
-                        .append(": ").append(c.nota)
-                        .append("\n");
-            }
-            Toast.makeText(this, builder.toString(), Toast.LENGTH_LONG).show();
-        });
+    private void cargarAlumnosInscriptos(int materiaId) {
+        List<Inscripcion> inscripciones = inscripcionDao.obtenerTodas();
+        alumnosInscriptos = new ArrayList<>();
 
-        btnVolver.setOnClickListener(v -> finish());
+        for (Inscripcion ins : inscripciones) {
+            if (ins.materiaId == materiaId) {
+                Usuario alumno = usuarioDao.obtenerPorId(ins.alumnoId);
+                if (alumno != null) {
+                    alumnosInscriptos.add(alumno);
+                }
+            }
+        }
+
+        List<String> nombresAlumnos = new ArrayList<>();
+        for (Usuario u : alumnosInscriptos) {
+            nombresAlumnos.add(u.getNombre());
+        }
+
+        ArrayAdapter<String> adapterAlumnos = new ArrayAdapter<>(
+                this, android.R.layout.simple_spinner_item, nombresAlumnos
+        );
+        adapterAlumnos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerAlumno.setAdapter(adapterAlumnos);
     }
 }

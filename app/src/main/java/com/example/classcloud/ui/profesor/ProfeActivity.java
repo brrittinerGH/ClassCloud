@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,14 +22,16 @@ public class ProfeActivity extends AppCompatActivity {
     private Button btnVerMaterias, btnEvaluaciones, btnCalificaciones, btnAsistencias, btnVolver;
     private TextView tvTitulo;
     private MateriaDAO materiaDao;
-    private String profesorActual;
 
+    private int profesorId;          // 🔹 ID del profesor logueado
+    private String nombreProfesor;   // 🔹 Nombre solo para mostrar
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profe);
 
+        // Inicializar vistas
         tvTitulo = findViewById(R.id.tvTitulo);
         btnVerMaterias = findViewById(R.id.btVerMaterias);
         btnEvaluaciones = findViewById(R.id.btEvaluaciones);
@@ -36,43 +39,64 @@ public class ProfeActivity extends AppCompatActivity {
         btnAsistencias = findViewById(R.id.btAsistencias);
         btnVolver = findViewById(R.id.btVolver);
 
+        // Inicializar base de datos
         materiaDao = AppDatabase.getInstance(this).materiaDao();
 
+        // Obtener datos del profesor logueado
+        profesorId = getIntent().getIntExtra("idProfesor", -1);
+        nombreProfesor = getIntent().getStringExtra("nombreProfesor");
 
+        if (profesorId == -1) {
+            Toast.makeText(this, "Error: no se pudo identificar al profesor", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+
+        tvTitulo.setText("Bienvenido, " + nombreProfesor);
+
+        // 🔹 Ver materias asignadas
         btnVerMaterias.setOnClickListener(v -> mostrarMateriasAsignadas());
 
+        // 🔹 Crear o ver evaluaciones
+        btnEvaluaciones.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ProfesorEvaluacionesActivity.class);
+            intent.putExtra("idProfesor", profesorId);
+            intent.putExtra("nombreProfesor", nombreProfesor);
+            startActivity(intent);
+        });
 
-        btnEvaluaciones.setOnClickListener(v ->
-                startActivity(new Intent(this, ProfesorEvaluacionesActivity.class)));
+        // 🔹 Cargar calificaciones
+        btnCalificaciones.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ProfesorCalificacionesActivity.class);
+            intent.putExtra("idProfesor", profesorId);
+            startActivity(intent);
+        });
 
+        // 🔹 Controlar asistencias
+        btnAsistencias.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ProfesorAsistenciasActivity.class);
+            intent.putExtra("idProfesor", profesorId);
+            startActivity(intent);
+        });
 
-        btnCalificaciones.setOnClickListener(v ->
-                startActivity(new Intent(this, ProfesorCalificacionesActivity.class)));
-
-
-        btnAsistencias.setOnClickListener(v ->
-                startActivity(new Intent(this, ProfesorAsistenciasActivity.class)));
-
-
+        // 🔹 Volver al login
         btnVolver.setOnClickListener(v -> {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         });
-
-        profesorActual = getIntent().getStringExtra("nombreProfesor");
-
     }
 
     private void mostrarMateriasAsignadas() {
-        List<Materia> materias = materiaDao.obtenerTodas();
+        List<Materia> materias = materiaDao.obtenerPorProfesorId(profesorId);
+
         StringBuilder builder = new StringBuilder();
         for (Materia m : materias) {
-            if (m.profesor.equals(profesorActual)) {
-                builder.append("• ").append(m.nombre).append("\n");
-            }
+            builder.append("• ").append(m.nombre).append("\n");
         }
 
-        if (builder.length() == 0) builder.append("No tenés materias asignadas.");
+        if (builder.length() == 0) {
+            builder.append("No tenés materias asignadas.");
+        }
 
         new AlertDialog.Builder(this)
                 .setTitle("Mis materias")

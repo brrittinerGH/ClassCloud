@@ -9,15 +9,16 @@ public class Evaluacion {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
-    public String materia;
+    public int materiaId; // 👈 relación con la materia
     public String tipo;
     public String descripcion;
     public String fecha;
 
-    public Evaluacion(String materia, String tipo, String descripcion, String fecha) {
-        this.materia = materia;
+    public Evaluacion(int materiaId, String tipo, String descripcion, String fecha) {
+        this.materiaId = materiaId;
         this.tipo = tipo;
         this.descripcion = descripcion;
         this.fecha = fecha;
     }
 }
+

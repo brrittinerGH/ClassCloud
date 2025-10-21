@@ -39,7 +39,7 @@ public class AdminActivity extends AppCompatActivity {
 
         Button btnAgregarUsuario = findViewById(R.id.btAgregarProfesor);
 
-        btnAgregarUsuario.setText("Agregar Profesor/Alumno");
+        btnAgregarUsuario.setText("Agregar Usuario");
 
         btnAgregarUsuario.setOnClickListener(v -> {
             startActivity(new Intent(this, CrearUsuarioActivity.class));
