@@ -99,7 +99,7 @@ public class ModificarMateriaActivity extends AppCompatActivity {
 
         builder.setPositiveButton("Guardar", (dialog, which) -> {
             if (profesores.isEmpty()) {
-                Toast.makeText(this, "No hay profesores disponibles", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.noProfesDis), Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -107,13 +107,13 @@ public class ModificarMateriaActivity extends AppCompatActivity {
             materia.profesorId = nuevoProfeId;
             materiaDao.actualizar(materia);
 
-            Toast.makeText(this, "Materia actualizada correctamente", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.materiaAct), Toast.LENGTH_SHORT).show();
             cargarMaterias();
         });
 
         builder.setNegativeButton("Eliminar", (dialog, which) -> {
             materiaDao.eliminarPorId(materia.id);
-            Toast.makeText(this, "Materia eliminada", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.materiaEli), Toast.LENGTH_SHORT).show();
             cargarMaterias();
         });
 

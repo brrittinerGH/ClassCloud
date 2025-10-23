@@ -48,7 +48,7 @@ public class CrearMateriaActivity extends AppCompatActivity {
 
         listaProfesores = usuarioDao.obtenerPorRol("profesor");
         if (listaProfesores.isEmpty()) {
-            Toast.makeText(this, "No hay profesores cargados", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.noprofes), Toast.LENGTH_LONG).show();
         }
 
         List<String> nombres = new ArrayList<>();
@@ -69,12 +69,12 @@ public class CrearMateriaActivity extends AppCompatActivity {
             try {
                 String nombre = nombreMateria.getText().toString().trim();
                 if (nombre.isEmpty()) {
-                    Toast.makeText(this, "Ingrese el nombre de la materia", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.mtrNombre), Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (listaProfesores.isEmpty()) {
-                    Toast.makeText(this, "No hay profesores disponibles", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.noprofes), Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -85,12 +85,12 @@ public class CrearMateriaActivity extends AppCompatActivity {
                 Materia nuevaMateria = new Materia(nombre, profesorId);
                 materiaDao.insertar(nuevaMateria);
 
-                Toast.makeText(this, "Materia creada correctamente", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.mtrCreadaCo), Toast.LENGTH_SHORT).show();
                 nombreMateria.setText("");
 
             } catch (Exception e) {
                 e.printStackTrace();
-                Toast.makeText(this, "Error al crear la materia: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.mtrError) + e.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 

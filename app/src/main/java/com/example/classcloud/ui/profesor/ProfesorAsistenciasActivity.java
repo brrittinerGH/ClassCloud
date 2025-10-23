@@ -66,7 +66,7 @@ public class ProfesorAsistenciasActivity extends AppCompatActivity {
         //  Obtener el ID del profesor logueado
         profesorId = getIntent().getIntExtra("idProfesor", -1);
         if (profesorId == -1) {
-            Toast.makeText(this, "Error: no se encontró el ID del profesor", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.errorIdProfe), Toast.LENGTH_LONG).show();
             finish();
             return;
         }
@@ -82,7 +82,7 @@ public class ProfesorAsistenciasActivity extends AppCompatActivity {
         spinnerMateria.setAdapter(adapterMaterias);
 
         //  Cargar estados posibles
-        String[] estados = {"Presente", "Ausente", "Tarde"};
+        String[] estados = {getString(R.string.presente), getString(R.string.ausente), getString(R.string.tarde)};
         ArrayAdapter<String> adapterEstados = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, estados);
         adapterEstados.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -124,7 +124,7 @@ public class ProfesorAsistenciasActivity extends AppCompatActivity {
                     this,
                     (view, year, month, dayOfMonth) -> {
                         fechaSeleccionada = dayOfMonth + "/" + (month + 1) + "/" + year;
-                        tvFechaSeleccionada.setText("Fecha: " + fechaSeleccionada);
+                        tvFechaSeleccionada.setText(getString(R.string.fecha,fechaSeleccionada));
                     },
                     calendar.get(Calendar.YEAR),
                     calendar.get(Calendar.MONTH),
@@ -135,12 +135,12 @@ public class ProfesorAsistenciasActivity extends AppCompatActivity {
         //  Guardar asistencia
         btnGuardarAsistencia.setOnClickListener(v -> {
             if (materiasProfesor.isEmpty() || alumnosMateria == null || alumnosMateria.isEmpty()) {
-                Toast.makeText(this, "Seleccioná materia y alumno", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.selecMatYalum), Toast.LENGTH_SHORT).show();
                 return;
             }
 
             if (fechaSeleccionada.isEmpty()) {
-                Toast.makeText(this, "Seleccioná una fecha", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.selecFecha), Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -149,16 +149,16 @@ public class ProfesorAsistenciasActivity extends AppCompatActivity {
             String estado = spinnerEstado.getSelectedItem().toString();
 
             asistenciaDao.insertar(new Asistencia(alumnoId, materiaId, fechaSeleccionada, estado));
-            Toast.makeText(this, "Asistencia registrada correctamente", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.asisRegCorrect), Toast.LENGTH_SHORT).show();
 
-            tvFechaSeleccionada.setText("Fecha no seleccionada");
+            tvFechaSeleccionada.setText(getString(R.string.fechaNoSelec));
             fechaSeleccionada = "";
         });
 
         //  Ver asistencias (en AlertDialog)
         btnVerAsistencias.setOnClickListener(v -> {
             if (materiasProfesor.isEmpty()) {
-                Toast.makeText(this, "No tenés materias asignadas", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.noMateriasAsig), Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -170,7 +170,7 @@ public class ProfesorAsistenciasActivity extends AppCompatActivity {
                 builder.append("📘 ").append(m.nombre).append(":\n");
                 for (Asistencia a : asistencias) {
                     Usuario alumno = usuarioDao.obtenerPorId(a.alumnoId);
-                    String nombreAlumno = (alumno != null) ? alumno.getNombre() : "Alumno desconocido";
+                    String nombreAlumno = (alumno != null) ? alumno.getNombre() : getString(R.string.alumDesconocido);
                     builder.append("  • ").append(a.fecha)
                             .append(" - ").append(nombreAlumno)
                             .append(": ").append(a.estado)
@@ -180,7 +180,7 @@ public class ProfesorAsistenciasActivity extends AppCompatActivity {
             }
 
             if (builder.length() == 0)
-                builder.append("No hay asistencias registradas.");
+                builder.append(getString(R.string.noAsistReg));
 
             TextView textView = new TextView(this);
             textView.setText(builder.toString());
@@ -189,9 +189,9 @@ public class ProfesorAsistenciasActivity extends AppCompatActivity {
             textView.setScrollBarStyle(android.view.View.SCROLLBARS_INSIDE_INSET);
 
             new AlertDialog.Builder(this)
-                    .setTitle("Asistencias registradas")
+                    .setTitle(getString(R.string.asisReg))
                     .setView(textView)
-                    .setPositiveButton("Cerrar", null)
+                    .setPositiveButton(getString(R.string.cerrar), null)
                     .show();
         });
 

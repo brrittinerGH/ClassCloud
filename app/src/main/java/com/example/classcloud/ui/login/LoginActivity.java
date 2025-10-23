@@ -41,14 +41,14 @@ public class LoginActivity extends AppCompatActivity {
             String contrasenia = passField.getText().toString().trim();
 
             if (nombreUsuario.isEmpty() || contrasenia.isEmpty()) {
-                Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.comCampos), Toast.LENGTH_SHORT).show();
                 return;
             }
 
             Usuario usuario = dao.login(nombreUsuario, contrasenia);
 
             if (usuario != null) {
-                Toast.makeText(this, "Bienvenido " + usuario.getNombre(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.bienvenido) + usuario.getNombre(), Toast.LENGTH_SHORT).show();
 
                 switch (usuario.getRol()) {
                     case "admin":
@@ -72,14 +72,14 @@ public class LoginActivity extends AppCompatActivity {
                         break;
 
                     default:
-                        Toast.makeText(this, "Rol desconocido", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, getString(R.string.rolDesconocido), Toast.LENGTH_SHORT).show();
                         break;
                 }
 
                 finish();
 
             } else {
-                Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.datosIncorrectos), Toast.LENGTH_SHORT).show();
             }
         });
     }

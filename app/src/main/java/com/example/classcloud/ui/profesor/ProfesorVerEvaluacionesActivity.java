@@ -43,7 +43,7 @@ public class ProfesorVerEvaluacionesActivity extends AppCompatActivity {
         //  Recibir ID del profesor logueado
         profesorId = getIntent().getIntExtra("idProfesor", -1);
         if (profesorId == -1) {
-            Toast.makeText(this, "Error: no se encontró el ID del profesor", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.errorIdProfe), Toast.LENGTH_LONG).show();
             finish();
             return;
         }
@@ -59,7 +59,7 @@ public class ProfesorVerEvaluacionesActivity extends AppCompatActivity {
         List<Materia> materiasProfesor = materiaDao.obtenerPorProfesorId(profesorId);
 
         if (materiasProfesor.isEmpty()) {
-            Toast.makeText(this, "No tienes materias asignadas", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.noMateriasAsig), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -83,7 +83,7 @@ public class ProfesorVerEvaluacionesActivity extends AppCompatActivity {
         }
 
         if (datos.isEmpty()) {
-            datos.add("No hay evaluaciones registradas para tus materias.");
+            datos.add(getString(R.string.noEvalsRegis));
         }
 
         //  Mostrar en ListView

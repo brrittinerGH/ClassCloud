@@ -59,7 +59,7 @@ public class ProfesorCalificacionesActivity extends AppCompatActivity {
         // Recuperar el ID del profesor desde el intent
         profesorId = getIntent().getIntExtra("idProfesor", -1);
         if (profesorId == -1) {
-            Toast.makeText(this, "Error: no se encontró el ID del profesor", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.errorIdProfe), Toast.LENGTH_LONG).show();
             finish();
             return;
         }
@@ -93,13 +93,13 @@ public class ProfesorCalificacionesActivity extends AppCompatActivity {
         // Guardar la nota
         btGuardar.setOnClickListener(v -> {
             if (alumnosInscriptos == null || alumnosInscriptos.isEmpty()) {
-                Toast.makeText(this, "No hay alumnos inscriptos en esta materia", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.noAlumnosIns), Toast.LENGTH_SHORT).show();
                 return;
             }
 
             String notaStr = etNota.getText().toString().trim();
             if (notaStr.isEmpty()) {
-                Toast.makeText(this, "Ingrese una nota", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.ingNota), Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -107,7 +107,7 @@ public class ProfesorCalificacionesActivity extends AppCompatActivity {
             try {
                 nota = Double.parseDouble(notaStr);
             } catch (NumberFormatException e) {
-                Toast.makeText(this, "Ingrese un número válido", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.ingNumValido), Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -117,7 +117,7 @@ public class ProfesorCalificacionesActivity extends AppCompatActivity {
             Calificacion nueva = new Calificacion(alumnoId, materiaId, nota);
             calificacionDao.insertar(nueva);
 
-            Toast.makeText(this, "Calificación guardada correctamente", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.calGuardada), Toast.LENGTH_SHORT).show();
             etNota.setText("");
         });
 

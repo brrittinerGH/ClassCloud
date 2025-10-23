@@ -63,7 +63,7 @@ public class AlumnoActivity extends AppCompatActivity {
         nombreAlumno = getIntent().getStringExtra("nombreAlumno");
 
         if (idAlumno == -1) {
-            Toast.makeText(this, "Error: no se encontró el ID del alumno", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.errorIdAlumno), Toast.LENGTH_LONG).show();
             finish();
             return;
         }
@@ -112,16 +112,16 @@ public class AlumnoActivity extends AppCompatActivity {
         Inscripcion existente = inscripcionDao.obtenerPorAlumnoYMateria(idAlumno, materia.id);
 
         if (existente != null) {
-            Toast.makeText(this, "Ya estás inscripto en esta materia", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.yaInscripto), Toast.LENGTH_SHORT).show();
             return;
         }
 
         new AlertDialog.Builder(this)
-                .setTitle("Inscribirse en " + materia.nombre)
-                .setMessage("¿Deseás inscribirte en esta materia?")
+                .setTitle(getString(R.string.inscEn) + materia.nombre)
+                .setMessage(getString(R.string.deseaIns))
                 .setPositiveButton("Sí", (dialog, which) -> {
                     inscripcionDao.insertar(new Inscripcion(idAlumno, materia.id));
-                    Toast.makeText(this, "Inscripción realizada", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.inscRealizada), Toast.LENGTH_SHORT).show();
                 })
                 .setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss())
                 .show();
@@ -133,7 +133,7 @@ public class AlumnoActivity extends AppCompatActivity {
         StringBuilder builder = new StringBuilder();
 
         if (inscripciones.isEmpty()) {
-            builder.append("No estás inscripto en ninguna materia.");
+            builder.append(getString(R.string.noInscripto));
         } else {
             for (Inscripcion i : inscripciones) {
                 Materia materia = materiaDao.obtenerPorId(i.materiaId);
@@ -144,7 +144,7 @@ public class AlumnoActivity extends AppCompatActivity {
         }
 
         new AlertDialog.Builder(this)
-                .setTitle("Mis materias inscriptas")
+                .setTitle(getString(R.string.matInscriptas))
                 .setMessage(builder.toString())
                 .setPositiveButton("OK", null)
                 .show();
@@ -162,7 +162,7 @@ public class AlumnoActivity extends AppCompatActivity {
                         .evaluacionDao()
                         .obtenerPorMateria(materia.id);
                 if (evals.isEmpty()) {
-                    builder.append("  Sin evaluaciones programadas.\n");
+                    builder.append(getString(R.string.sinEvalsProg)+"\n");
                 } else {
                     for (Evaluacion e : evals) {
                         builder.append("  • ").append(e.tipo)
@@ -175,7 +175,7 @@ public class AlumnoActivity extends AppCompatActivity {
         }
 
         new AlertDialog.Builder(this)
-                .setTitle("Evaluaciones próximas")
+                .setTitle(getString(R.string.evalsProx))
                 .setMessage(builder.toString())
                 .setPositiveButton("OK", null)
                 .show();
@@ -187,12 +187,12 @@ public class AlumnoActivity extends AppCompatActivity {
                 .obtenerPorAlumno(idAlumno);
 
         if (calificaciones.isEmpty()) {
-            Toast.makeText(this, "No tenés notas registradas", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.noNotasReg), Toast.LENGTH_SHORT).show();
             return;
         }
 
         StringBuilder builder = new StringBuilder();
-        builder.append("📚 Tus calificaciones:\n\n");
+        builder.append(getString(R.string.tusNotas)+"\n\n");
 
 
         Set<Integer> materiasProcesadas = new HashSet<>();
@@ -210,7 +210,7 @@ public class AlumnoActivity extends AppCompatActivity {
 
                     builder.append("• ")
                             .append(materia.nombre)
-                            .append(" (Promedio: ")
+                            .append(getString(R.string.prom))
                             .append(String.format("%.2f", promedio))
                             .append(")\n");
 
@@ -220,7 +220,7 @@ public class AlumnoActivity extends AppCompatActivity {
                             .obtenerNotasMateria(idAlumno, materia.id);
 
                     for (Calificacion nota : notasMateria) {
-                        builder.append("   - Nota: ").append(nota.nota).append("\n");
+                        builder.append(getString(R.string.nota)).append(nota.nota).append("\n");
                     }
 
                     builder.append("\n"); // salto entre materias
@@ -232,7 +232,7 @@ public class AlumnoActivity extends AppCompatActivity {
 
 
         new AlertDialog.Builder(this)
-                .setTitle("Mis notas y promedios")
+                .setTitle(getString(R.string.notYProm))
                 .setMessage(builder.toString())
                 .setPositiveButton("OK", null)
                 .show();
@@ -244,12 +244,12 @@ public class AlumnoActivity extends AppCompatActivity {
                 .obtenerPorAlumno(idAlumno);
 
         if (asistencias.isEmpty()) {
-            Toast.makeText(this, "No hay asistencias registradas", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.noAsistReg), Toast.LENGTH_SHORT).show();
             return;
         }
 
         StringBuilder builder = new StringBuilder();
-        builder.append("📅 Historial de asistencias:\n\n");
+        builder.append(getString(R.string.histAsist)+"\n\n");
 
         for (Asistencia a : asistencias) {
             Materia materia = materiaDao.obtenerPorId(a.materiaId);
@@ -261,7 +261,7 @@ public class AlumnoActivity extends AppCompatActivity {
         }
 
         new AlertDialog.Builder(this)
-                .setTitle("Mis asistencias")
+                .setTitle(getString(R.string.misAsist))
                 .setMessage(builder.toString())
                 .setPositiveButton("OK", null)
                 .show();
