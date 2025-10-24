@@ -1,5 +1,6 @@
 package com.example.classcloud.ui.profesor;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -27,7 +28,7 @@ public class ProfesorCalificacionesActivity extends AppCompatActivity {
 
     private Spinner spinnerMateria, spinnerAlumno;
     private EditText etNota;
-    private Button btGuardar, btVolver;
+    private Button btGuardar, btVerNotas, btVolver;
 
     private MateriaDAO materiaDao;
     private InscripcionDAO inscripcionDao;
@@ -48,6 +49,7 @@ public class ProfesorCalificacionesActivity extends AppCompatActivity {
         spinnerAlumno = findViewById(R.id.spinnerAlumno);
         etNota = findViewById(R.id.etNota);
         btGuardar = findViewById(R.id.btGuardarNota);
+        btVerNotas = findViewById(R.id.btVerNotas); // 🔹 nuevo botón
         btVolver = findViewById(R.id.btVolver);
 
         AppDatabase db = AppDatabase.getInstance(this);
@@ -56,7 +58,7 @@ public class ProfesorCalificacionesActivity extends AppCompatActivity {
         calificacionDao = db.calificacionDao();
         usuarioDao = db.usuarioDao();
 
-        // Recuperar el ID del profesor desde el intent
+        // 🔹 Recuperar el ID del profesor desde el intent
         profesorId = getIntent().getIntExtra("idProfesor", -1);
         if (profesorId == -1) {
             Toast.makeText(this, getString(R.string.errorIdProfe), Toast.LENGTH_LONG).show();
@@ -64,8 +66,8 @@ public class ProfesorCalificacionesActivity extends AppCompatActivity {
             return;
         }
 
-        // Cargar materias del profesor
-        materiasProfesor = materiaDao.obtenerPorProfesor(profesorId);
+        // 🔹 Cargar materias del profesor
+        materiasProfesor = materiaDao.obtenerPorProfesorId(profesorId);
         List<String> nombresMaterias = new ArrayList<>();
         for (Materia m : materiasProfesor) {
             nombresMaterias.add(m.nombre);
@@ -77,7 +79,7 @@ public class ProfesorCalificacionesActivity extends AppCompatActivity {
         adapterMaterias.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMateria.setAdapter(adapterMaterias);
 
-        // Cuando se selecciona una materia, mostrar los alumnos inscriptos
+        // 🔹 Cuando se selecciona una materia, mostrar los alumnos inscriptos
         spinnerMateria.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(android.widget.AdapterView<?> parent, android.view.View view, int position, long id) {
@@ -90,7 +92,7 @@ public class ProfesorCalificacionesActivity extends AppCompatActivity {
             public void onNothingSelected(android.widget.AdapterView<?> parent) { }
         });
 
-        // Guardar la nota
+        // 🔹 Guardar la nota
         btGuardar.setOnClickListener(v -> {
             if (alumnosInscriptos == null || alumnosInscriptos.isEmpty()) {
                 Toast.makeText(this, getString(R.string.noAlumnosIns), Toast.LENGTH_SHORT).show();
@@ -121,6 +123,14 @@ public class ProfesorCalificacionesActivity extends AppCompatActivity {
             etNota.setText("");
         });
 
+        // 🔹 Abrir pantalla “Ver Calificaciones”
+        btVerNotas.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ProfesorVerCalificacionesActivity.class);
+            intent.putExtra("idProfesor", profesorId);
+            startActivity(intent);
+        });
+
+        // 🔹 Volver
         btVolver.setOnClickListener(v -> finish());
     }
 
