@@ -42,7 +42,7 @@ public class CrearUsuarioActivity extends AppCompatActivity {
             String contrasena = etContrasena.getText().toString().trim();
 
             if (nombre.isEmpty() || contrasena.isEmpty()) {
-                Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.comCampos), Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -52,12 +52,13 @@ public class CrearUsuarioActivity extends AppCompatActivity {
             // Verificar si ya existe un usuario con ese nombre
             Usuario existente = usuarioDao.login(nombre, contrasena);
             if (existente != null) {
-                Toast.makeText(this, "Ya existe un usuario con ese nombre", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.nomExistente), Toast.LENGTH_SHORT).show();
                 return;
             }
 
             usuarioDao.insertar(new Usuario(nombre, contrasena, rol));
-            Toast.makeText(this, "Usuario (" + rol + ") creado correctamente", Toast.LENGTH_SHORT).show();
+            String mensaje = getString(R.string.usuarioCreado, rol);
+            Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
 
             etNombre.setText("");
             etContrasena.setText("");

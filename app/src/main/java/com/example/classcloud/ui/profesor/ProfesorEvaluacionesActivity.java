@@ -60,7 +60,7 @@ public class ProfesorEvaluacionesActivity extends AppCompatActivity {
         //  Obtener ID del profesor logueado
         profesorId = getIntent().getIntExtra("idProfesor", -1);
         if (profesorId == -1) {
-            Toast.makeText(this, "Error: no se encontró el ID del profesor", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.errorIdProfe), Toast.LENGTH_LONG).show();
             finish();
             return;
         }
@@ -69,7 +69,7 @@ public class ProfesorEvaluacionesActivity extends AppCompatActivity {
         materiasProfesor = materiaDao.obtenerPorProfesorId(profesorId);
 
         if (materiasProfesor == null || materiasProfesor.isEmpty()) {
-            Toast.makeText(this, "No tenés materias asignadas", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.noMateriasAsig), Toast.LENGTH_LONG).show();
         }
 
         //  Llenar spinner con nombres de materias
@@ -99,7 +99,7 @@ public class ProfesorEvaluacionesActivity extends AppCompatActivity {
                     this,
                     (view, year, month, dayOfMonth) -> {
                         fechaSeleccionada = dayOfMonth + "/" + (month + 1) + "/" + year;
-                        tvFechaSeleccionada.setText("Fecha: " + fechaSeleccionada);
+                        tvFechaSeleccionada.setText(getString(R.string.fecha,fechaSeleccionada));
                     },
                     calendar.get(Calendar.YEAR),
                     calendar.get(Calendar.MONTH),
@@ -110,7 +110,7 @@ public class ProfesorEvaluacionesActivity extends AppCompatActivity {
         //  Guardar evaluación
         btGuardarEval.setOnClickListener(v -> {
             if (materiasProfesor.isEmpty()) {
-                Toast.makeText(this, "No hay materias disponibles", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.noMatsDisp), Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -118,12 +118,12 @@ public class ProfesorEvaluacionesActivity extends AppCompatActivity {
             String tipo = spinnerTipo.getSelectedItem().toString();
 
             if (descripcion.isEmpty()) {
-                Toast.makeText(this, "Ingrese una descripción", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.ingresDesc), Toast.LENGTH_SHORT).show();
                 return;
             }
 
             if (fechaSeleccionada.isEmpty()) {
-                Toast.makeText(this, "Seleccione una fecha", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,getString(R.string.selecFecha), Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -137,11 +137,11 @@ public class ProfesorEvaluacionesActivity extends AppCompatActivity {
             );
 
             evaluacionDao.insertar(nuevaEval);
-            Toast.makeText(this, "Evaluación guardada correctamente", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.evalGuardadaCorrect), Toast.LENGTH_SHORT).show();
 
             etDescripcion.setText("");
             fechaSeleccionada = "";
-            tvFechaSeleccionada.setText("Fecha no seleccionada");
+            tvFechaSeleccionada.setText(getString(R.string.fechaNoSelec));
         });
 
         btEvaluaciones.setOnClickListener(v -> {

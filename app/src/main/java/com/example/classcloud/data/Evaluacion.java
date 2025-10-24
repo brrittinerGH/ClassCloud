@@ -9,7 +9,7 @@ public class Evaluacion {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
-    public int materiaId; // 👈 relación con la materia
+    public int materiaId; //  relación con la materia
     public String tipo;
     public String descripcion;
     public String fecha;

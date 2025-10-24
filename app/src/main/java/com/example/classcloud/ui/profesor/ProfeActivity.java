@@ -47,12 +47,13 @@ public class ProfeActivity extends AppCompatActivity {
         nombreProfesor = getIntent().getStringExtra("nombreProfesor");
 
         if (profesorId == -1) {
-            Toast.makeText(this, "Error: no se pudo identificar al profesor", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.errorProfesor), Toast.LENGTH_LONG).show();
             finish();
             return;
         }
 
-        tvTitulo.setText("Bienvenido, " + nombreProfesor);
+        tvTitulo.setText(getString(R.string.bienvenidoProfe, nombreProfesor));
+
 
         // 🔹 Ver materias asignadas
         btnVerMaterias.setOnClickListener(v -> mostrarMateriasAsignadas());
@@ -96,11 +97,11 @@ public class ProfeActivity extends AppCompatActivity {
         }
 
         if (builder.length() == 0) {
-            builder.append("No tenés materias asignadas.");
+            builder.append(getString(R.string.noMateriasAsig));
         }
 
         new AlertDialog.Builder(this)
-                .setTitle("Mis materias")
+                .setTitle(getString(R.string.misMaterias))
                 .setMessage(builder.toString())
                 .setPositiveButton("OK", null)
                 .show();
