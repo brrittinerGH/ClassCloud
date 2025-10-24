@@ -1,0 +1,17 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Checked state -->
+    <item android:state_checked="true">
+        <shape android:shape="oval">
+            <solid android:color="#00BCD4" /> <!-- Cyan fill -->
+            <size android:width="20dp" android:height="20dp" />
+        </shape>
+    </item>
+
+    <!-- Unchecked state -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#B0BEC5" /> <!-- Light grey fill -->
+            <size android:width="20dp" android:height="20dp" />
+        </shape>
+    </item>
+</selector>

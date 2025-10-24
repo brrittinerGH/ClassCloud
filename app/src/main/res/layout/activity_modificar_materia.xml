@@ -7,6 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.admin.ModificarMateriaActivity">
 
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,14 +26,16 @@
             android:divider="@android:color/darker_gray"
             android:dividerHeight="1dp" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btVolver"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/btColor"
-            android:text="@string/btVolver" />
+            style="@style/DarkMutedButton"
+            android:layout_gravity="center"
+            android:layout_marginTop="14dp"
+            android:layout_width="250dp"
+            android:text="@string/btVolver"
+            />
+
     </LinearLayout>
 
-
+    </HorizontalScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

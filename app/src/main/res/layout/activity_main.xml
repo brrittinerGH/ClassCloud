@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -25,8 +26,8 @@
 
             <ImageView
                 android:id="@+id/Logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="292dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/imagen" />
         </LinearLayout>
@@ -39,21 +40,23 @@
             android:orientation="vertical"
             android:textAlignment="center">
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/btIniciarSesion"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/btColor"
+                style="@style/MyCustomButton"
                 android:text="@string/btIniciarSesion"
-                android:textColorLink="#3F3F3F" />
+                android:layout_width="200dp"
+                android:layout_marginTop="10dp"
+                />
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/btSalir"
-                android:layout_width="203dp"
-                android:layout_height="wrap_content"
+                style="@style/DarkMutedButton"
+                android:layout_width="200dp"
                 android:layout_marginTop="20dp"
-                android:backgroundTint="@color/btColor"
-                android:text="@string/btSalir" />
+                android:text="@string/btSalir"
+                />
+
+
 
         </LinearLayout>
 

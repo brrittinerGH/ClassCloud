@@ -3,6 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,18 +31,19 @@
 
         <EditText
             android:id="@+id/etDescripcion"
+            style="@style/ModernInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:hint="Descripción"
             android:minHeight="48dp" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btFecha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/MyCustomButton"
+            android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            android:backgroundTint="@color/btColor"
+            android:layout_width="250dp"
             android:text="@string/btFecha" />
 
         <TextView
@@ -49,30 +55,30 @@
             android:text="Fecha no seleccionada" />
 
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btGuardarEval"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="@color/btColor"
+            style="@style/MyCustomButton"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_width="250dp"
             android:text="@string/btGuardarEvaluacion" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btVerEval"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/MyCustomButton"
+            android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            android:backgroundTint="@color/btColor"
+            android:layout_width="250dp"
             android:text="@string/btEvaluaciones" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btVolver"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/btColor"
+            style="@style/DarkMutedButton"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:layout_width="100dp"
             android:text="@string/btVolver" />
     </LinearLayout>
 
-
+    </HorizontalScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

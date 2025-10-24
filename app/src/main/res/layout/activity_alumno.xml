@@ -7,6 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.alumno.AlumnoActivity">
 
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
     <LinearLayout
         android:id="@+id/lyAlumno"
         android:orientation="vertical"
@@ -29,49 +34,47 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btVerInscripciones"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/btColor"
+            style="@style/MyCustomButton"
+            android:layout_gravity="center"
+            android:layout_marginTop="18dp"
+            android:layout_width="250dp"
             android:text="@string/btInscripciones" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btVerEvaluaciones"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/MyCustomButton"
+            android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            android:backgroundTint="@color/btColor"
+            android:layout_width="250dp"
             android:text="@string/btVerEvaluaciones" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btVerNotas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/MyCustomButton"
+            android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            android:backgroundTint="@color/btColor"
+            android:layout_width="250dp"
             android:text="@string/btVerNotasPromedio" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btnVerAsistencias"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/MyCustomButton"
+            android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            android:backgroundTint="@color/btColor"
+            android:layout_width="250dp"
             android:text="@string/btVerAsistencia" />
 
 
-
-        <Button
+        <android.widget.Button
             android:id="@+id/btVolver"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/btColor"
+            style="@style/DarkMutedButton"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:text="@string/btVolver" />
 
 
     </LinearLayout>
-
+    </HorizontalScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

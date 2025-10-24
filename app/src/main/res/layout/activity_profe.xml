@@ -3,9 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:background="@drawable/background_gradient"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.profesor.ProfeActivity">
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
     <LinearLayout
         android:id="@+id/LyProfe"
@@ -20,50 +26,52 @@
             android:text="Panel del Profesor"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:textColor="#FFFFFF"
             android:layout_marginBottom="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btVerMaterias"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:backgroundTint="@color/btColor"
+            style="@style/MyCustomButton"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_width="250dp"
             android:text="@string/btVerMateriasAsig" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btEvaluaciones"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:backgroundTint="@color/btColor"
+            style="@style/MyCustomButton"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_width="250dp"
             android:text="@string/btCrearEvaluaciones" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btCalificaciones"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:backgroundTint="@color/btColor"
+            style="@style/MyCustomButton"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_width="250dp"
             android:text="@string/btCalificaciones" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btAsistencias"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:backgroundTint="@color/btColor"
+            style="@style/MyCustomButton"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_width="250dp"
             android:text="@string/btAsistencias" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btVolver"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="350dp"
-            android:backgroundTint="@color/btColor"
+            style="@style/DarkMutedButton"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:layout_width="200dp"
             android:text="@string/btVolver" />
     </LinearLayout>
 
+    </HorizontalScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

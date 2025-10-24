@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:background="@drawable/background_gradient"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:layout_gravity="center_vertical"
@@ -36,38 +37,38 @@
             android:gravity="center|center_horizontal"
             android:orientation="vertical">
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/btAgregarProfesor"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/btColor"
-                android:text="@string/btAgregarProfesor" />
+                style="@style/MyCustomButton"
+                android:text="@string/btAgregarProfesor"
+                android:layout_marginTop="20dp"
+                android:layout_width="250dp"/>
 
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/btCrearMateria"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/btColor"
-                android:text="@string/btCrearMateria" />
+                style="@style/MyCustomButton"
+                android:text="@string/btCrearMateria"
+                android:layout_marginTop="14dp"
+                android:layout_width="250dp"/>
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/btModificarMaterias"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/btColor"
-                android:text="@string/btModificarMaterias" />
+                style="@style/MyCustomButton"
+                android:layout_gravity="center"
+                android:layout_marginTop="14dp"
+                android:layout_width="250dp"
+                android:text="@string/btModificarMaterias"
+                />
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/btVolver"
+                style="@style/DarkMutedButton"
+                android:layout_gravity="center"
+                android:layout_marginTop="25dp"
                 android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/btColor"
-                android:text="@string/btVolver" />
+                android:text="@string/btVolver"
+                />
 
         </LinearLayout>
 

@@ -6,7 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.profesor.ProfesorVerEvaluacionesActivity">
-
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
     <LinearLayout
         android:id="@+id/lyEvaluaciones"
         android:layout_width="match_parent"
@@ -36,18 +39,15 @@
             android:background="@android:color/white"
             android:padding="8dp" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btnVolver"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/DarkMutedButton"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_width="250dp"
             android:text="Volver"
-            android:textAllCaps="false"
-            android:layout_marginTop="12dp"
-            android:backgroundTint="#1976D2"
-            android:textColor="@android:color/white"
-            android:padding="10dp" />
+             />
 
-    </LinearLayout>
-
+    </LinearLayout></HorizontalScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

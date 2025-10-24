@@ -7,6 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.admin.CrearMateriaActivity">
 
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,9 +20,11 @@
 
         <EditText
             android:id="@+id/nombreMateria"
+            style="@style/ModernInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/nombreMateria"
+            android:layout_marginTop="25dp"
             android:minHeight="48dp" />
 
         <Spinner
@@ -27,20 +34,22 @@
             android:layout_marginTop="8dp"
             android:minHeight="48dp" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btGuardarMateria"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="@color/btColor"
+            style="@style/MyCustomButton"
+            android:layout_gravity="center"
+            android:layout_marginTop="14dp"
+            android:layout_width="250dp"
             android:text="@string/btGuardarMateria" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btVolver"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/btColor"
+            style="@style/DarkMutedButton"
+            android:layout_width="250dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="14dp"
             android:text="@string/btVolver" />
     </LinearLayout>
+
+    </HorizontalScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
