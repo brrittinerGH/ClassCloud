@@ -15,6 +15,7 @@
             android:padding="16dp"
             android:background="#FAFAFA">
 
+
             <TextView
                 android:id="@+id/tvTitulo"
                 android:layout_width="wrap_content"
@@ -38,7 +39,7 @@
 
             <android.widget.Button
                 android:id="@+id/btnVolver"
-                style="@style/MyCustomButton"
+                style="@style/DarkMutedButton"
                 android:layout_gravity="center"
                 android:text="@string/btVolver" />
 

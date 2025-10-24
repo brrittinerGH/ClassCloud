@@ -22,12 +22,12 @@
             android:id="@+id/tvTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Evaluaciones del profesor"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="#222222"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:text="@string/txEvaluacionesProfesor"
+            android:textColor="#222222"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <ListView
             android:id="@+id/listEvaluaciones"
@@ -42,11 +42,10 @@
         <android.widget.Button
             android:id="@+id/btnVolver"
             style="@style/DarkMutedButton"
+            android:layout_width="250dp"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            android:layout_width="250dp"
-            android:text="Volver"
-             />
+            android:text="@string/btVolver" />
 
     </LinearLayout></HorizontalScrollView>
 

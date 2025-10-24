@@ -99,5 +99,7 @@
     <string name="ingresDesc">Enter a description</string>
     <string name="evalGuardadaCorrect">Assessment saved successfully</string>
     <string name="noEvalsRegis">No assessments registered for your subjects.</string>
-    <string name="noCalReg">No grades registered for your subjects.</string>
+    <string name="noCalReg">No grades registered for your subjects.</string>}
+    <string name="txEvaluacionesProfesor">Teacher evaluations</string>
+    <string name="txNotasRegistradas">Registered notes</string>
 </resources>

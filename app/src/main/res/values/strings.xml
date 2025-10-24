@@ -100,4 +100,6 @@
     <string name="evalGuardadaCorrect">Evaluación guardada correctamente</string>
     <string name="noEvalsRegis">No hay evaluaciones registradas para tus materias.</string>
     <string name="noCalReg">No hay calificaciones registradas para tus materias.</string>
+    <string name="txEvaluacionesProfesor">Evaluaciones del Profesor</string>
+    <string name="txNotasRegistradas">Notas Registradas</string>
 </resources>
