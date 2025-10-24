@@ -58,7 +58,7 @@ public class ProfesorCalificacionesActivity extends AppCompatActivity {
         calificacionDao = db.calificacionDao();
         usuarioDao = db.usuarioDao();
 
-        // 🔹 Recuperar el ID del profesor desde el intent
+        //  Recuperar el ID del profesor desde el intent
         profesorId = getIntent().getIntExtra("idProfesor", -1);
         if (profesorId == -1) {
             Toast.makeText(this, getString(R.string.errorIdProfe), Toast.LENGTH_LONG).show();
@@ -66,7 +66,7 @@ public class ProfesorCalificacionesActivity extends AppCompatActivity {
             return;
         }
 
-        // 🔹 Cargar materias del profesor
+        //  Cargar materias del profesor
         materiasProfesor = materiaDao.obtenerPorProfesorId(profesorId);
         List<String> nombresMaterias = new ArrayList<>();
         for (Materia m : materiasProfesor) {
@@ -79,7 +79,7 @@ public class ProfesorCalificacionesActivity extends AppCompatActivity {
         adapterMaterias.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMateria.setAdapter(adapterMaterias);
 
-        // 🔹 Cuando se selecciona una materia, mostrar los alumnos inscriptos
+        //  Cuando se selecciona una materia, mostrar los alumnos inscriptos
         spinnerMateria.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(android.widget.AdapterView<?> parent, android.view.View view, int position, long id) {
@@ -92,7 +92,7 @@ public class ProfesorCalificacionesActivity extends AppCompatActivity {
             public void onNothingSelected(android.widget.AdapterView<?> parent) { }
         });
 
-        // 🔹 Guardar la nota
+        //  Guardar la nota
         btGuardar.setOnClickListener(v -> {
             if (alumnosInscriptos == null || alumnosInscriptos.isEmpty()) {
                 Toast.makeText(this, getString(R.string.noAlumnosIns), Toast.LENGTH_SHORT).show();
@@ -123,14 +123,13 @@ public class ProfesorCalificacionesActivity extends AppCompatActivity {
             etNota.setText("");
         });
 
-        // 🔹 Abrir pantalla “Ver Calificaciones”
+        //  Abrir pantalla “Ver Calificaciones”
         btVerNotas.setOnClickListener(v -> {
             Intent intent = new Intent(this, ProfesorVerCalificacionesActivity.class);
             intent.putExtra("idProfesor", profesorId);
             startActivity(intent);
         });
 
-        // 🔹 Volver
         btVolver.setOnClickListener(v -> finish());
     }
 

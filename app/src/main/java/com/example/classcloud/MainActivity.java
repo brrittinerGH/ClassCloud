@@ -31,4 +31,10 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, com.example.classcloud.ui.login.LoginActivity.class);
             startActivity(intent);
         });
+
+        // Botón para cerrar todas las actividades y salir de la app
+        Button btnSalir = findViewById(R.id.btSalir);
+        btnSalir.setOnClickListener(v -> {
+            finishAffinity();
+        });
     }}

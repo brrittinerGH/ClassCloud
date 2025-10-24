@@ -50,7 +50,6 @@ public class ProfesorVerEvaluacionesActivity extends AppCompatActivity {
 
         mostrarEvaluaciones();
 
-        //  Botón volver
         btnVolver.setOnClickListener(v -> finish());
     }
 
