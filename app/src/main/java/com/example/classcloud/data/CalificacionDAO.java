@@ -35,4 +35,8 @@ public interface CalificacionDAO {
     // Calcular el promedio del alumno en una materia
     @Query("SELECT AVG(nota) FROM calificaciones WHERE alumnoId = :idAlumno AND materiaId = :idMateria")
     Double promedioPorMateria(int idAlumno, int idMateria);
+
+    @Query("SELECT * FROM calificaciones WHERE materiaId = :materiaId")
+    List<Calificacion> obtenerPorMateria(int materiaId);
+
 }
