@@ -44,7 +44,7 @@ public class ProfesorVerCalificacionesActivity extends AppCompatActivity {
 
         profesorId = getIntent().getIntExtra("idProfesor", -1);
         if (profesorId == -1) {
-            Toast.makeText(this, "Error: no se encontró el ID del profesor", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.errorIdProfe), Toast.LENGTH_LONG).show();
             finish();
             return;
         }
@@ -66,15 +66,15 @@ public class ProfesorVerCalificacionesActivity extends AppCompatActivity {
 
             for (Calificacion c : calificaciones) {
                 Usuario alumno = usuarioDao.obtenerPorId(c.alumnoId);
-                String nombreAlumno = (alumno != null) ? alumno.getNombre() : "Alumno desconocido";
-                datos.add("   • " + nombreAlumno + " → Nota: " + c.nota);
+                String nombreAlumno = (alumno != null) ? alumno.getNombre() : getString(R.string.alumDesconocido);
+                datos.add("   • " + nombreAlumno+getString(R.string.nota) + c.nota);
             }
 
             datos.add(""); // espacio entre materias
         }
 
         if (datos.isEmpty()) {
-            datos.add("No hay calificaciones registradas para tus materias.");
+            datos.add(getString(R.string.noCalReg));
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,

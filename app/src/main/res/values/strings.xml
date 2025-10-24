@@ -99,5 +99,5 @@
     <string name="ingresDesc">Ingrese una descripción</string>
     <string name="evalGuardadaCorrect">Evaluación guardada correctamente</string>
     <string name="noEvalsRegis">No hay evaluaciones registradas para tus materias.</string>
-
+    <string name="noCalReg">No hay calificaciones registradas para tus materias.</string>
 </resources>
