@@ -19,12 +19,12 @@
                 android:id="@+id/tvTitulo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Notas registradas"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="#222222"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="16dp"
+                android:text="@string/txNotasRegistradas"
+                android:textColor="#222222"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <ListView
                 android:id="@+id/listCalificaciones"
@@ -36,16 +36,11 @@
                 android:background="@android:color/white"
                 android:padding="8dp" />
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/btnVolver"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Volver"
-                android:textAllCaps="false"
-                android:layout_marginTop="12dp"
-                android:backgroundTint="#1976D2"
-                android:textColor="@android:color/white"
-                android:padding="10dp" />
+                style="@style/MyCustomButton"
+                android:layout_gravity="center"
+                android:text="@string/btVolver" />
 
         </LinearLayout>
 
