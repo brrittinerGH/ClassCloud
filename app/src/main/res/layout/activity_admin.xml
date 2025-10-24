@@ -10,67 +10,70 @@
     android:paddingTop="10dp"
     tools:context=".ui.admin.AdminActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteY="10dp">
-
-        <LinearLayout
-            android:id="@+id/lyLogo2"
-            android:layout_width="wrap_content"
-            android:layout_height="260dp"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/Logo2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/imagen" />
-        </LinearLayout>
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="358dp"
-            android:gravity="center|center_horizontal"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <android.widget.Button
-                android:id="@+id/btAgregarProfesor"
-                style="@style/MyCustomButton"
-                android:text="@string/btAgregarProfesor"
-                android:layout_marginTop="20dp"
-                android:layout_width="250dp"/>
-
-
-            <android.widget.Button
-                android:id="@+id/btCrearMateria"
-                style="@style/MyCustomButton"
-                android:text="@string/btCrearMateria"
-                android:layout_marginTop="14dp"
-                android:layout_width="250dp"/>
-
-            <android.widget.Button
-                android:id="@+id/btModificarMaterias"
-                style="@style/MyCustomButton"
+            <LinearLayout
+                android:id="@+id/lyLogo2"
+                android:layout_width="wrap_content"
+                android:layout_height="260dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="14dp"
-                android:layout_width="250dp"
-                android:text="@string/btModificarMaterias"
-                />
+                android:orientation="horizontal">
 
-            <android.widget.Button
-                android:id="@+id/btVolver"
-                style="@style/DarkMutedButton"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:layout_width="200dp"
-                android:text="@string/btVolver"
-                />
+                <ImageView
+                    android:id="@+id/Logo2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/imagen" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="358dp"
+                android:gravity="center|center_horizontal"
+                android:orientation="vertical">
+
+                <android.widget.Button
+                    android:id="@+id/btAgregarProfesor"
+                    style="@style/MyCustomButton"
+                    android:layout_width="250dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/btAgregarProfesor" />
+
+
+                <android.widget.Button
+                    android:id="@+id/btCrearMateria"
+                    style="@style/MyCustomButton"
+                    android:layout_width="250dp"
+                    android:layout_marginTop="14dp"
+                    android:text="@string/btCrearMateria" />
+
+                <android.widget.Button
+                    android:id="@+id/btModificarMaterias"
+                    style="@style/MyCustomButton"
+                    android:layout_width="250dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="14dp"
+                    android:text="@string/btModificarMaterias" />
+
+                <android.widget.Button
+                    android:id="@+id/btVolver"
+                    style="@style/DarkMutedButton"
+                    android:layout_width="200dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="25dp"
+                    android:text="@string/btVolver" />
+
+            </LinearLayout>
 
         </LinearLayout>
+    </ScrollView>
 
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,82 +3,82 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <HorizontalScrollView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-        <Spinner
-            android:id="@+id/spinnerMateria"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:minHeight="48dp" />
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <Spinner
-            android:id="@+id/spinnerTipo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:minHeight="48dp" />
+            <Spinner
+                android:id="@+id/spinnerMateria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="50dp"
+                android:minHeight="48dp" />
 
-        <EditText
-            android:id="@+id/etDescripcion"
-            style="@style/ModernInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="Descripción"
-            android:minHeight="48dp" />
+            <Spinner
+                android:id="@+id/spinnerTipo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:minHeight="48dp" />
 
-        <android.widget.Button
-            android:id="@+id/btFecha"
-            style="@style/MyCustomButton"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:layout_width="250dp"
-            android:text="@string/btFecha" />
+            <EditText
+                android:id="@+id/etDescripcion"
+                style="@style/ModernInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Descripción"
+                android:minHeight="48dp" />
 
-        <TextView
-            android:id="@+id/tvFechaSeleccionada"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:gravity="center_horizontal"
-            android:text="Fecha no seleccionada" />
+            <TextView
+                android:id="@+id/tvFechaSeleccionada"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:gravity="center_horizontal"
+                android:text="@string/txFechaNoSeleccionada" />
+
+            <android.widget.Button
+                android:id="@+id/btFecha"
+                style="@style/MyCustomButton"
+                android:layout_width="250dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="@string/btFecha" />
 
 
-        <android.widget.Button
-            android:id="@+id/btGuardarEval"
-            style="@style/MyCustomButton"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:layout_width="250dp"
-            android:text="@string/btGuardarEvaluacion" />
+            <android.widget.Button
+                android:id="@+id/btGuardarEval"
+                style="@style/MyCustomButton"
+                android:layout_width="250dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:text="@string/btGuardarEvaluacion" />
 
-        <android.widget.Button
-            android:id="@+id/btVerEval"
-            style="@style/MyCustomButton"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:layout_width="250dp"
-            android:text="@string/btEvaluaciones" />
+            <android.widget.Button
+                android:id="@+id/btVerEval"
+                style="@style/MyCustomButton"
+                android:layout_width="250dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:text="@string/btEvaluaciones" />
 
-        <android.widget.Button
-            android:id="@+id/btVolver"
-            style="@style/DarkMutedButton"
-            android:layout_gravity="center"
-            android:layout_marginTop="40dp"
-            android:layout_width="100dp"
-            android:text="@string/btVolver" />
-    </LinearLayout>
+            <android.widget.Button
+                android:id="@+id/btVolver"
+                style="@style/DarkMutedButton"
+                android:layout_width="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:text="@string/btVolver" />
+        </LinearLayout>
+    </ScrollView>
 
-    </HorizontalScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

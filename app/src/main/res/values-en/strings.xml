@@ -102,4 +102,8 @@
     <string name="noCalReg">No grades registered for your subjects.</string>}
     <string name="txEvaluacionesProfesor">Teacher evaluations</string>
     <string name="txNotasRegistradas">Registered notes</string>
+    <string name="txFechaNoSeleccionada">Please select a date</string>
+    <string name="txMateriasDisponibles">Available Subjects</string>
+    <string name="txNuevoUsuario">Add User</string>
+    <string name="txControlarAsistencias">Manage attendances</string>
 </resources>

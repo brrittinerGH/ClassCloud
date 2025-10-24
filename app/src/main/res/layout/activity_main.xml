@@ -8,58 +8,58 @@
     android:background="@drawable/background_gradient"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/lyLogo"
-            android:layout_width="wrap_content"
-            android:layout_height="260dp"
-            android:layout_weight="0"
-            android:orientation="horizontal"
-            android:scaleX="1.30"
-            android:scaleY="1.30">
-
-            <ImageView
-                android:id="@+id/Logo"
-                android:layout_width="match_parent"
-                android:layout_height="292dp"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/imagen" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lyLogin"
             android:layout_width="match_parent"
-            android:layout_height="358dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:textAlignment="center">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <android.widget.Button
-                android:id="@+id/btIniciarSesion"
-                style="@style/MyCustomButton"
-                android:text="@string/btIniciarSesion"
-                android:layout_width="200dp"
-                android:layout_marginTop="10dp"
-                />
+            <LinearLayout
+                android:id="@+id/lyLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="260dp"
+                android:layout_weight="0"
+                android:orientation="horizontal"
+                android:scaleX="1.30"
+                android:scaleY="1.30">
 
-            <android.widget.Button
-                android:id="@+id/btSalir"
-                style="@style/DarkMutedButton"
-                android:layout_width="200dp"
-                android:layout_marginTop="20dp"
-                android:text="@string/btSalir"
-                />
+                <ImageView
+                    android:id="@+id/Logo"
+                    android:layout_width="match_parent"
+                    android:layout_height="292dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/imagen" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lyLogin"
+                android:layout_width="match_parent"
+                android:layout_height="358dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:textAlignment="center">
+
+                <android.widget.Button
+                    android:id="@+id/btIniciarSesion"
+                    style="@style/MyCustomButton"
+                    android:layout_width="200dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/btIniciarSesion" />
+
+                <android.widget.Button
+                    android:id="@+id/btSalir"
+                    style="@style/DarkMutedButton"
+                    android:layout_width="200dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/btSalir" />
 
 
+            </LinearLayout>
 
         </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,47 +6,63 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.profesor.ProfesorVerEvaluacionesActivity">
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
-    <LinearLayout
-        android:id="@+id/lyEvaluaciones"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:background="#FAFAFA">
 
-        <TextView
-            android:id="@+id/tvTitulo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="16dp"
-            android:text="@string/txEvaluacionesProfesor"
-            android:textColor="#222222"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <ListView
-            android:id="@+id/listEvaluaciones"
+        <LinearLayout
+            android:id="@+id/lyEvaluaciones"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:divider="@android:color/black"
-            android:dividerHeight="1dp"
-            android:background="@android:color/white"
-            android:padding="8dp" />
+            android:layout_height="wrap_content"
+            android:background="#FAFAFA"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <android.widget.Button
-            android:id="@+id/btnVolver"
-            style="@style/DarkMutedButton"
-            android:layout_width="250dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:text="@string/btVolver" />
+            <TextView
+                android:id="@+id/tvTitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/txEvaluacionesProfesor"
+                android:textColor="#222222"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-    </LinearLayout></HorizontalScrollView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="503dp"
+                android:orientation="horizontal">
+
+                <ListView
+                    android:id="@+id/listEvaluaciones"
+                    android:layout_width="match_parent"
+                    android:layout_height="502dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/white"
+                    android:divider="@android:color/black"
+                    android:dividerHeight="1dp"
+                    android:padding="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="81dp"
+                android:gravity="bottom|center"
+                android:orientation="horizontal">
+
+                <android.widget.Button
+                    android:id="@+id/btnVolver"
+                    style="@style/DarkMutedButton"
+                    android:layout_width="250dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/btVolver" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

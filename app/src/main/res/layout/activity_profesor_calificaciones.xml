@@ -7,65 +7,65 @@
     android:layout_height="match_parent"
     tools:context=".ui.profesor.ProfesorCalificacionesActivity">
 
-    <HorizontalScrollView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-        <Spinner
-            android:id="@+id/spinnerAlumno"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:minHeight="48dp" />
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <Spinner
-            android:id="@+id/spMateria"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:minHeight="48dp" />
+            <Spinner
+                android:id="@+id/spinnerAlumno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:minHeight="48dp" />
+
+            <Spinner
+                android:id="@+id/spMateria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:minHeight="48dp" />
 
 
-        <EditText
-            android:id="@+id/etNota"
-            style="@style/ModernInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="Nota"
-            android:inputType="numberDecimal"
-            android:minHeight="48dp" />
+            <EditText
+                android:id="@+id/etNota"
+                style="@style/ModernInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Nota"
+                android:inputType="numberDecimal"
+                android:minHeight="48dp" />
 
-        <android.widget.Button
-            android:id="@+id/btGuardarNota"
-            style="@style/MyCustomButton"
-            android:layout_gravity="center"
-            android:layout_marginTop="70dp"
-            android:layout_width="250dp"
-            android:text="@string/btGuardarNota" />
+            <android.widget.Button
+                android:id="@+id/btGuardarNota"
+                style="@style/MyCustomButton"
+                android:layout_width="250dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="70dp"
+                android:text="@string/btGuardarNota" />
 
-        <android.widget.Button
-            android:id="@+id/btVerNotas"
-            style="@style/MyCustomButton"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:layout_width="250dp"
-            android:text="@string/btVerNotas" />
+            <android.widget.Button
+                android:id="@+id/btVerNotas"
+                style="@style/MyCustomButton"
+                android:layout_width="250dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:text="@string/btVerNotas" />
 
-        <android.widget.Button
-            android:id="@+id/btVolver"
-            style="@style/DarkMutedButton"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:layout_width="100dp"
-            android:text="@string/btVolver" />
-    </LinearLayout>
-    </HorizontalScrollView>
+            <android.widget.Button
+                android:id="@+id/btVolver"
+                style="@style/DarkMutedButton"
+                android:layout_width="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:text="@string/btVolver" />
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

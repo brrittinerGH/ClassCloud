@@ -7,49 +7,48 @@
     android:layout_height="match_parent"
     tools:context=".ui.admin.CrearMateriaActivity">
 
-    <HorizontalScrollView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="24dp">
-
-        <EditText
-            android:id="@+id/nombreMateria"
-            style="@style/ModernInput"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/nombreMateria"
-            android:layout_marginTop="25dp"
-            android:minHeight="48dp" />
+            android:orientation="vertical"
+            android:padding="24dp">
 
-        <Spinner
-            android:id="@+id/spinnerProfesor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:minHeight="48dp" />
+            <EditText
+                android:id="@+id/nombreMateria"
+                style="@style/ModernInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:hint="@string/nombreMateria"
+                android:minHeight="48dp" />
 
-        <android.widget.Button
-            android:id="@+id/btGuardarMateria"
-            style="@style/MyCustomButton"
-            android:layout_gravity="center"
-            android:layout_marginTop="14dp"
-            android:layout_width="250dp"
-            android:text="@string/btGuardarMateria" />
+            <Spinner
+                android:id="@+id/spinnerProfesor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:minHeight="48dp" />
 
-        <android.widget.Button
-            android:id="@+id/btVolver"
-            style="@style/DarkMutedButton"
-            android:layout_width="250dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="14dp"
-            android:text="@string/btVolver" />
-    </LinearLayout>
+            <android.widget.Button
+                android:id="@+id/btGuardarMateria"
+                style="@style/MyCustomButton"
+                android:layout_width="250dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="14dp"
+                android:text="@string/btGuardarMateria" />
 
-    </HorizontalScrollView>
+            <android.widget.Button
+                android:id="@+id/btVolver"
+                style="@style/DarkMutedButton"
+                android:layout_width="250dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="14dp"
+                android:text="@string/btVolver" />
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

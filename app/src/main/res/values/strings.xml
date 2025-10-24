@@ -102,4 +102,8 @@
     <string name="noCalReg">No hay calificaciones registradas para tus materias.</string>
     <string name="txEvaluacionesProfesor">Evaluaciones del Profesor</string>
     <string name="txNotasRegistradas">Notas Registradas</string>
+    <string name="txFechaNoSeleccionada">Fecha no seleccionada</string>
+    <string name="txMateriasDisponibles">Materias Disponibles</string>
+    <string name="txNuevoUsuario">Agregar Usuario</string>
+    <string name="txControlarAsistencias">Controlar Asistencias</string>
 </resources>
