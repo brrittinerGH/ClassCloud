@@ -23,6 +23,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * Actividad que permite al profesor crear nuevas evaluaciones (exámenes o trabajos prácticos)
+ * para las materias que tiene asignadas.
+ *
+ *
+ */
 public class ProfesorEvaluacionesActivity extends AppCompatActivity {
 
     private Spinner spinnerMateria, spinnerTipo;

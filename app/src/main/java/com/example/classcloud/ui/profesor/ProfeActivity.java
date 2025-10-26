@@ -17,6 +17,14 @@ import com.example.classcloud.ui.login.LoginActivity;
 
 import java.util.List;
 
+/**
+ * Actividad principal para los profesores.
+ * Permite al docente ver sus materias asignadas, gestionar evaluaciones,
+ * registrar calificaciones, controlar asistencias y cerrar sesión.
+ *
+ * @author Lasso,Rittiner,Verrengia
+ * @version 1.0
+ */
 public class ProfeActivity extends AppCompatActivity {
 
     private Button btnVerMaterias, btnEvaluaciones, btnCalificaciones, btnAsistencias, btnVolver;
@@ -25,6 +33,8 @@ public class ProfeActivity extends AppCompatActivity {
 
     private int profesorId;          // 🔹 ID del profesor logueado
     private String nombreProfesor;   // 🔹 Nombre solo para mostrar
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +98,12 @@ public class ProfeActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Muestra un cuadro de diálogo con la lista de materias
+     * asignadas al profesor actualmente logueado.
+     *
+     * Si el profesor no tiene materias, se muestra un mensaje informativo.
+     */
     private void mostrarMateriasAsignadas() {
         List<Materia> materias = materiaDao.obtenerPorProfesorId(profesorId);
 

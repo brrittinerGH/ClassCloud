@@ -106,4 +106,8 @@
     <string name="txMateriasDisponibles">Available Subjects</string>
     <string name="txNuevoUsuario">Add User</string>
     <string name="txControlarAsistencias">Manage attendances</string>
+    <string name="materia_con_profesor">%1$s (teacher: %2$s)</string>
+    <string name="titulo_modificar_materia">Modify Subject: %1$s</string>
+    <string name="eliminar">Delete</string>
+    <string name="cancelar">Cancel</string>
 </resources>

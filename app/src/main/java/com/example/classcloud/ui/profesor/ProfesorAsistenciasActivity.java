@@ -25,6 +25,17 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * Actividad que permite al profesor registrar y visualizar asistencias
+ * de los alumnos en sus materias asignadas.
+ *
+ * Incluye selección de materia, alumno, estado de asistencia y fecha mediante
+ * un selector de calendario. También ofrece la opción de listar todas las
+ * asistencias registradas.
+ *
+ * @author Lasso,Rittiner,Verrengia
+ * @version 1.0
+ */
 public class ProfesorAsistenciasActivity extends AppCompatActivity {
 
     private Spinner spinnerMateria, spinnerAlumno, spinnerEstado;

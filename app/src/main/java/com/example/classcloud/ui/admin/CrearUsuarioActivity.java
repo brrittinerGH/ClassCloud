@@ -14,6 +14,15 @@ import com.example.classcloud.data.AppDatabase;
 import com.example.classcloud.data.Usuario;
 import com.example.classcloud.data.UsuarioDAO;
 
+/**
+ * Actividad que permite al administrador crear nuevos usuarios en el sistema,
+ * ya sean profesores o alumnos. Contiene campos de texto para el nombre
+ * y la contraseña, junto con opciones de rol y botones de acción.
+ *
+ *
+ * @author Lasso,Rittiner,Verrengia
+ * @version 1.0
+ */
 public class CrearUsuarioActivity extends AppCompatActivity {
 
     private EditText etNombre, etContrasena;
@@ -34,13 +43,14 @@ public class CrearUsuarioActivity extends AppCompatActivity {
         rbAlumno = findViewById(R.id.rbAlumno);
         btnGuardar = findViewById(R.id.btGuardar);
         btnVolver = findViewById(R.id.btVolver);
-
+        // Inicializa la base de datos y obtiene el DAO correspondiente
         usuarioDao = AppDatabase.getInstance(this).usuarioDao();
-
+        // Listener del botón "Guardar"
         btnGuardar.setOnClickListener(v -> {
             String nombre = etNombre.getText().toString().trim();
             String contrasena = etContrasena.getText().toString().trim();
 
+            //Si los campos estan vacios envia un mensaje
             if (nombre.isEmpty() || contrasena.isEmpty()) {
                 Toast.makeText(this, getString(R.string.comCampos), Toast.LENGTH_SHORT).show();
                 return;
@@ -55,8 +65,9 @@ public class CrearUsuarioActivity extends AppCompatActivity {
                 Toast.makeText(this, getString(R.string.nomExistente), Toast.LENGTH_SHORT).show();
                 return;
             }
-
+            // Inserta el nuevo usuario en la base de datos
             usuarioDao.insertar(new Usuario(nombre, contrasena, rol));
+            // Muestra mensaje de confirmación
             String mensaje = getString(R.string.usuarioCreado, rol);
             Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
 

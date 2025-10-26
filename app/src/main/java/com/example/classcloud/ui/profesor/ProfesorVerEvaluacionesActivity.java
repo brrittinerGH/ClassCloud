@@ -18,6 +18,12 @@ import com.example.classcloud.data.MateriaDAO;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * Actividad que muestra todas las evaluaciones (exámenes, trabajos prácticos, etc.)
+ * registradas por el profesor en sus materias.
+ *
+ */
 public class ProfesorVerEvaluacionesActivity extends AppCompatActivity {
 
     private ListView lvEvaluaciones;

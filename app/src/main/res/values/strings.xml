@@ -106,4 +106,8 @@
     <string name="txMateriasDisponibles">Materias Disponibles</string>
     <string name="txNuevoUsuario">Agregar Usuario</string>
     <string name="txControlarAsistencias">Controlar Asistencias</string>
+    <string name="materia_con_profesor">%1$s (Profesor/a: %2$s)</string>
+    <string name="titulo_modificar_materia">Modificar materia: %1$s</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="cancelar">Cancelar</string>
 </resources>

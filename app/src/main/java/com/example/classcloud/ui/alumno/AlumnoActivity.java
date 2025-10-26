@@ -26,6 +26,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
+/**
+ * Actividad principal del alumno.
+ * Permite ver las materias disponibles, inscribirse, consultar inscripciones,
+ * ver evaluaciones, notas y asistencias.
+ *
+ * Esta clase se comunica con la base de datos Room mediante los DAO correspondientes.
+ *
+ * @author Lasso,Rittiner,Verrengia
+ * @version 1.0
+ *
+ */
 public class AlumnoActivity extends AppCompatActivity {
 
     private ListView listMaterias;
@@ -62,12 +74,14 @@ public class AlumnoActivity extends AppCompatActivity {
         idAlumno = getIntent().getIntExtra("idAlumno", -1);
         nombreAlumno = getIntent().getStringExtra("nombreAlumno");
 
+        // Verificar si se obtuvo correctamente el ID del alumno
         if (idAlumno == -1) {
             Toast.makeText(this, getString(R.string.errorIdAlumno), Toast.LENGTH_LONG).show();
             finish();
             return;
         }
 
+        // Cargar materias disponibles en la lista
         cargarMaterias();
 
         //  Inscribirse en una materia
@@ -95,6 +109,9 @@ public class AlumnoActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Carga todas las materias disponibles desde la base de datos y las muestra en la lista.
+     */
     private void cargarMaterias() {
         materias = materiaDao.obtenerTodas();
         List<String> nombres = new ArrayList<>();
@@ -102,11 +119,14 @@ public class AlumnoActivity extends AppCompatActivity {
         for (Materia m : materias) {
             nombres.add(m.nombre);
         }
-
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nombres);
         listMaterias.setAdapter(adapter);
     }
 
+    /**
+     * Muestra un diálogo para inscribirse en una materia.
+     * @param materia Materia seleccionada por el alumno.
+     */
     private void mostrarDialogoInscripcion(Materia materia) {
         // Verificar si el alumno ya está inscripto en la materia
         Inscripcion existente = inscripcionDao.obtenerPorAlumnoYMateria(idAlumno, materia.id);
@@ -116,18 +136,23 @@ public class AlumnoActivity extends AppCompatActivity {
             return;
         }
 
+        // Crear el diálogo de confirmación
         new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.inscEn) + materia.nombre)
                 .setMessage(getString(R.string.deseaIns))
                 .setPositiveButton("Sí", (dialog, which) -> {
+                    // Registrar nueva inscripción en la base de datos
                     inscripcionDao.insertar(new Inscripcion(idAlumno, materia.id));
                     Toast.makeText(this, getString(R.string.inscRealizada), Toast.LENGTH_SHORT).show();
                 })
-                .setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss())
+                .setNegativeButton(getString(R.string.cancelar), (dialog, which) -> dialog.dismiss())
                 .show();
     }
 
 
+    /**
+     * Muestra todas las materias en las que el alumno está inscripto.
+     */
     private void mostrarInscripciones() {
         List<Inscripcion> inscripciones = inscripcionDao.obtenerPorAlumno(idAlumno);
         StringBuilder builder = new StringBuilder();
@@ -150,6 +175,9 @@ public class AlumnoActivity extends AppCompatActivity {
                 .show();
     }
 
+    /**
+     * Muestra las evaluaciones programadas de las materias en las que el alumno está inscripto.
+     */
     private void mostrarEvaluaciones() {
         List<Inscripcion> inscripciones = inscripcionDao.obtenerPorAlumno(idAlumno);
         StringBuilder builder = new StringBuilder();
@@ -181,6 +209,10 @@ public class AlumnoActivity extends AppCompatActivity {
                 .show();
     }
 
+
+    /**
+     * Muestra todas las calificaciones y promedios del alumno por materia.
+     */
     private void mostrarNotas() {
         List<Calificacion> calificaciones = AppDatabase.getInstance(this)
                 .calificacionDao()
@@ -238,6 +270,9 @@ public class AlumnoActivity extends AppCompatActivity {
                 .show();
     }
 
+    /**
+     * Muestra el historial de asistencias del alumno.
+     */
     private void mostrarAsistencias() {
         List<Asistencia> asistencias = AppDatabase.getInstance(this)
                 .asistenciaDao()

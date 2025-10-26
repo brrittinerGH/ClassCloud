@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     case "profesor":
                         Intent intentProfesor = new Intent(this, ProfeActivity.class);
-                        // 👇 enviamos tanto el nombre como el ID del profesor
+                        //  enviamos tanto el nombre como el ID del profesor
                         intentProfesor.putExtra("idProfesor", usuario.getId());
                         intentProfesor.putExtra("nombreProfesor", usuario.getNombre());
                         startActivity(intentProfesor);
@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     case "alumno":
                         Intent intentAlumno = new Intent(this, AlumnoActivity.class);
-                        // 👇 lo mismo para el alumno
+                        //  lo mismo para el alumno
                         intentAlumno.putExtra("idAlumno", usuario.getId());
                         intentAlumno.putExtra("nombreAlumno", usuario.getNombre());
                         startActivity(intentAlumno);

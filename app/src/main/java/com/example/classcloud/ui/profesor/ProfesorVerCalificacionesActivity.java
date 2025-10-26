@@ -20,6 +20,11 @@ import com.example.classcloud.data.UsuarioDAO;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Actividad que permite al profesor visualizar las calificaciones registradas
+ * de sus materias. Muestra una lista agrupada por materia con los alumnos y sus notas.
+ *
+ */
 public class ProfesorVerCalificacionesActivity extends AppCompatActivity {
 
     private ListView listCalificaciones;
@@ -54,6 +59,14 @@ public class ProfesorVerCalificacionesActivity extends AppCompatActivity {
         btnVolver.setOnClickListener(v -> finish());
     }
 
+
+    /**
+     * Muestra todas las calificaciones correspondientes a las materias
+     * del profesor logueado. Agrupa los datos por materia e incluye el
+     * nombre de cada alumno con su nota.
+     *
+     * Si no hay calificaciones registradas, muestra un mensaje informativo.
+     */
     private void mostrarCalificaciones() {
         List<Materia> materiasProfesor = materiaDao.obtenerPorProfesorId(profesorId);
         List<String> datos = new ArrayList<>();

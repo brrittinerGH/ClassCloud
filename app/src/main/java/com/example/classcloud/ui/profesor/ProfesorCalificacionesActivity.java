@@ -24,6 +24,14 @@ import com.example.classcloud.data.UsuarioDAO;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Actividad que permite al profesor registrar calificaciones
+ * y visualizar las notas cargadas de sus materias.
+ *
+ * @author Lasso,Rittiner,Verrengia
+ * @version 1.0
+ */
 public class ProfesorCalificacionesActivity extends AppCompatActivity {
 
     private Spinner spinnerMateria, spinnerAlumno;
@@ -133,6 +141,12 @@ public class ProfesorCalificacionesActivity extends AppCompatActivity {
         btVolver.setOnClickListener(v -> finish());
     }
 
+    /**
+     * Carga los alumnos inscriptos en una materia específica
+     * y los muestra en el Spinner correspondiente.
+     *
+     * @param materiaId ID de la materia seleccionada.
+     */
     private void cargarAlumnosInscriptos(int materiaId) {
         List<Inscripcion> inscripciones = inscripcionDao.obtenerTodas();
         alumnosInscriptos = new ArrayList<>();
